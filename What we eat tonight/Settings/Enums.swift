@@ -13,3 +13,9 @@ enum MyViews{
     case search
     case settings
 }
+
+enum SubViews{
+    case eat
+    case material
+    case recipe
+}

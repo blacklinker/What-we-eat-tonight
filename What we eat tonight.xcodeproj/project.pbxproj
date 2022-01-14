@@ -14,6 +14,11 @@
 		653090AB2784E98100E4432D /* What_we_eat_tonightTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653090AA2784E98100E4432D /* What_we_eat_tonightTests.swift */; };
 		653090B52784E98100E4432D /* What_we_eat_tonightUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653090B42784E98100E4432D /* What_we_eat_tonightUITests.swift */; };
 		653090B72784E98100E4432D /* What_we_eat_tonightUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653090B62784E98100E4432D /* What_we_eat_tonightUITestsLaunchTests.swift */; };
+		65413757278F76A900C585D1 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65413756278F76A900C585D1 /* ImageView.swift */; };
+		6541375B278F794B00C585D1 /* Material.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6541375A278F794B00C585D1 /* Material.swift */; };
+		6541375D278F79BC00C585D1 /* MaterialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6541375C278F79BC00C585D1 /* MaterialViewModel.swift */; };
+		6541375F278F7B6100C585D1 /* FirestoreServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6541375E278F7B6100C585D1 /* FirestoreServices.swift */; };
+		6541376127909D6600C585D1 /* MaterialsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6541376027909D6600C585D1 /* MaterialsView.swift */; };
 		655D9B9D278748D300CA8F82 /* NewRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655D9B9C278748D300CA8F82 /* NewRecipe.swift */; };
 		655D9B9F27876E9C00CA8F82 /* MaterialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655D9B9E27876E9C00CA8F82 /* MaterialView.swift */; };
 		655D9BA12787848600CA8F82 /* NewMaterial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655D9BA02787848600CA8F82 /* NewMaterial.swift */; };
@@ -95,6 +100,11 @@
 		653090B02784E98100E4432D /* What we eat tonightUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "What we eat tonightUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		653090B42784E98100E4432D /* What_we_eat_tonightUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = What_we_eat_tonightUITests.swift; sourceTree = "<group>"; };
 		653090B62784E98100E4432D /* What_we_eat_tonightUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = What_we_eat_tonightUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		65413756278F76A900C585D1 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
+		6541375A278F794B00C585D1 /* Material.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Material.swift; sourceTree = "<group>"; };
+		6541375C278F79BC00C585D1 /* MaterialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialViewModel.swift; sourceTree = "<group>"; };
+		6541375E278F7B6100C585D1 /* FirestoreServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreServices.swift; sourceTree = "<group>"; };
+		6541376027909D6600C585D1 /* MaterialsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialsView.swift; sourceTree = "<group>"; };
 		655D9B9C278748D300CA8F82 /* NewRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRecipe.swift; sourceTree = "<group>"; };
 		655D9B9E27876E9C00CA8F82 /* MaterialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialView.swift; sourceTree = "<group>"; };
 		655D9BA02787848600CA8F82 /* NewMaterial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMaterial.swift; sourceTree = "<group>"; };
@@ -245,6 +255,7 @@
 			children = (
 				655D9B9C278748D300CA8F82 /* NewRecipe.swift */,
 				655D9BA02787848600CA8F82 /* NewMaterial.swift */,
+				65413756278F76A900C585D1 /* ImageView.swift */,
 				655D9BA22787865300CA8F82 /* AddNewTopNav.swift */,
 				655D9B9E27876E9C00CA8F82 /* MaterialView.swift */,
 				6576C3DA278649A5000B6127 /* AddNewToolbar.swift */,
@@ -255,7 +266,10 @@
 		65413754278CD8BF00C585D1 /* MainPage */ = {
 			isa = PBXGroup;
 			children = (
+				654137652790B72E00C585D1 /* ViewModels */,
+				654137622790AC3D00C585D1 /* Models */,
 				65413755278CD91300C585D1 /* Views */,
+				6576C392278543F5000B6127 /* MainView.swift */,
 			);
 			path = MainPage;
 			sourceTree = "<group>";
@@ -264,11 +278,41 @@
 			isa = PBXGroup;
 			children = (
 				6576C39D2785FC72000B6127 /* BottomNav.swift */,
-				6576C392278543F5000B6127 /* MainView.swift */,
 				6576C39B2785F023000B6127 /* TopNav.swift */,
 				6576C3972785EE43000B6127 /* RowView.swift */,
+				6541376027909D6600C585D1 /* MaterialsView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		65413758278F790F00C585D1 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				6541375C278F79BC00C585D1 /* MaterialViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		65413759278F792A00C585D1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6541375A278F794B00C585D1 /* Material.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		654137622790AC3D00C585D1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		654137652790B72E00C585D1 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		655D9BA82787DE3600CA8F82 /* MyExtensions */ = {
@@ -291,6 +335,8 @@
 		65628055278690EE006A3203 /* AddPage */ = {
 			isa = PBXGroup;
 			children = (
+				65413759278F792A00C585D1 /* Models */,
+				65413758278F790F00C585D1 /* ViewModels */,
 				65413753278CD80900C585D1 /* Views */,
 				6562805827869167006A3203 /* AddScreen.swift */,
 			);
@@ -310,6 +356,7 @@
 			children = (
 				6562805327869043006A3203 /* ImagePicker.swift */,
 				6576C3B827862A83000B6127 /* AuthenticationService.swift */,
+				6541375E278F7B6100C585D1 /* FirestoreServices.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -479,6 +526,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6541375B278F794B00C585D1 /* Material.swift in Sources */,
 				655D9B9D278748D300CA8F82 /* NewRecipe.swift in Sources */,
 				6576C3CA27862F37000B6127 /* InputView.swift in Sources */,
 				6576C3D227863422000B6127 /* LoginSucceedView.swift in Sources */,
@@ -487,6 +535,7 @@
 				6576C3C227862C5E000B6127 /* WelcomeText.swift in Sources */,
 				6530909C2784E98000E4432D /* ContentView.swift in Sources */,
 				65E7E02F2788AF88001BB882 /* Authentication.swift in Sources */,
+				6541375F278F7B6100C585D1 /* FirestoreServices.swift in Sources */,
 				6576C3DB278649A5000B6127 /* AddNewToolbar.swift in Sources */,
 				655D9BAF2787E79100CA8F82 /* LoginViewModel.swift in Sources */,
 				655D9BAD2787E36100CA8F82 /* Credentials.swift in Sources */,
@@ -498,11 +547,14 @@
 				655D9B9F27876E9C00CA8F82 /* MaterialView.swift in Sources */,
 				6530909A2784E98000E4432D /* What_we_eat_tonightApp.swift in Sources */,
 				655D9BA12787848600CA8F82 /* NewMaterial.swift in Sources */,
+				6541376127909D6600C585D1 /* MaterialsView.swift in Sources */,
+				6541375D278F79BC00C585D1 /* MaterialViewModel.swift in Sources */,
 				6576C3C627862C83000B6127 /* UserImage.swift in Sources */,
 				6562805927869167006A3203 /* AddScreen.swift in Sources */,
 				6576C39E2785FC72000B6127 /* BottomNav.swift in Sources */,
 				6576C3BD27862B00000B6127 /* LoginScreen.swift in Sources */,
 				655D9BA72787960400CA8F82 /* RegisterView.swift in Sources */,
+				65413757278F76A900C585D1 /* ImageView.swift in Sources */,
 				6576C3D72786397E000B6127 /* Enums.swift in Sources */,
 				6576C3982785EE43000B6127 /* RowView.swift in Sources */,
 			);

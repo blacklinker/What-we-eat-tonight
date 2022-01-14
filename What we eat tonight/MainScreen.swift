@@ -24,7 +24,7 @@ struct MainScreen: View {
                 VStack{
                     switch myView{
                     case .main: MainView().modifier(AppendNavBar(myView: $myView))
-                    case .add: AddScreen().modifier(AppendNavBar(myView: $myView))
+                    case .add: AddScreen(myView: $myView)
                     case .settings: MainView().modifier(AppendNavBar(myView: $myView))
                     case .search: MainView().modifier(AppendNavBar(myView: $myView))
                     }

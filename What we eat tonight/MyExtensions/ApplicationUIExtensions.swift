@@ -16,7 +16,6 @@ extension UIApplication{
 }
 
 struct AppendNavBar: ViewModifier {
-    //@Binding var hideBotNav: Bool
     @Binding var myView: MyViews
     
     func body(content: Content) -> some View {
@@ -25,14 +24,22 @@ struct AppendNavBar: ViewModifier {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar{
                 ToolbarItem(placement: .bottomBar){
-//                    if(hideBotNav){
-//
-//                    }else{
-                        BottomNav(myView: $myView)
-                    //}
-                    
+                    BottomNav(myView: $myView)
                 }
             }
+    }
+}
+
+struct TopNavBarStyle: ViewModifier{
+    var isSeleced: Bool
+    func body(content: Content) -> some View {
+        if isSeleced{
+            content
+                .foregroundColor(.white)
+                .background(RoundedRectangle(cornerRadius: 25).frame(width: 70, height: 30))
+        }else{
+            content
+        }
     }
 }
 
@@ -42,12 +49,12 @@ struct MyButtonStyle: ButtonStyle{
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .font(.system(size: 12))
-                .frame(height: 20)
-                .padding(10)
-                .foregroundColor(.white)
-                .background(buttonColor)
-                .cornerRadius(15)
-                .disabled(!validated)
+            .frame(height: 20)
+            .padding(10)
+            .foregroundColor(.white)
+            .background(buttonColor)
+            .cornerRadius(15)
+            .disabled(!validated)
     }
     
     var buttonColor: Color {

@@ -15,10 +15,10 @@ struct NewRecipe: View {
     @State private var material = ""
     @State private var materials = [String]()
     
-    @State var  ifAdd: Bool = false
+    @State var ifAdd: Bool = false
     
     var body: some View {
-        NavigationView {
+        ZStack {
             VStack(alignment: .leading){
                 TextField("菜名", text: $name)
                     .font(.system(size: 15))
@@ -28,25 +28,11 @@ struct NewRecipe: View {
                     .cornerRadius(15)
                 HStack(alignment: .bottom){
                     Button(action: {
-                        ifAdd.toggle()
+                        withAnimation{
+                            ifAdd.toggle()
+                        }
                     }){
-                        if(selectedImage == nil){
-                            Image(systemName: "camera")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 30, height: 30, alignment: .center)
-                                .padding(10)
-                                .background(.white)
-                                .cornerRadius(15)
-                        }
-                        else{
-                            Image(uiImage: selectedImage!)
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 150, height: 150, alignment: .center)
-                                .background(.white)
-                                .cornerRadius(15)
-                        }
+                       ImageView(selectedImage: selectedImage)
                     }
                     Spacer()
                     Button(action: {
@@ -60,13 +46,12 @@ struct NewRecipe: View {
                 Spacer()
             }
             .padding().background(Color(.sRGB, red: 0.73, green: 0.73, blue: 0.73).opacity(0.5))
-            .toolbar{
-                ToolbarItem(placement: .bottomBar ){
-                    if(ifAdd){
-                        AddNewToolbar(selectedImage: $selectedImage, ifAdd: $ifAdd).zIndex(2)
-                    }
-                }
+            
+            if(ifAdd){
+                AddNewToolbar(selectedImage: $selectedImage, ifAdd: $ifAdd).transition(.move(edge: .bottom))
             }
+            
+            
         }
     }
     

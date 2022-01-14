@@ -8,13 +8,19 @@
 import SwiftUI
 
 struct TopNav: View {
+    @Binding var subView: SubViews
+    
     var body: some View {
         HStack(alignment: .center, spacing: 30){
-            Text("菜谱")
-            Text("吃什么")
-                .foregroundColor(.white)
-                .background(RoundedRectangle(cornerRadius: 25).frame(width: 70, height: 30))
-            Text("材料")
+            Button(action: { subView = .recipe }){
+                Text("菜谱").modifier(subView == .recipe ? TopNavBarStyle(isSeleced: true) : TopNavBarStyle(isSeleced: false))
+            }
+            Button(action: { subView = .eat }){
+            Text("吃什么").modifier(subView == .eat ? TopNavBarStyle(isSeleced: true) : TopNavBarStyle(isSeleced: false))
+            }
+            Button(action: { subView = .material }){
+            Text("材料").modifier(subView == .material ? TopNavBarStyle(isSeleced: true) : TopNavBarStyle(isSeleced: false))
+            }
         }
         .frame(width: UIScreen.main.bounds.width)
         .font(.system(size: 13))
@@ -23,6 +29,6 @@ struct TopNav: View {
 
 struct TopNav_Previews: PreviewProvider {
     static var previews: some View {
-        TopNav()
+        TopNav(subView: .constant(.eat))
     }
 }

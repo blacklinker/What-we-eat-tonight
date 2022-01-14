@@ -16,10 +16,10 @@ class MaterialViewModel : ObservableObject{
         FirestoreService.shared.getMaterials{ (result: Result<[Material], Error>) in
             self.showProgressView = true
             switch result{
-            case .success:
-                completion(result.get())
+            case .success(let lst)  :
+                completion(lst)
             case .failure:
-                completion(result.get())
+                return
             }
             
         }

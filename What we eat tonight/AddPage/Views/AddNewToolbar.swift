@@ -44,7 +44,6 @@ struct AddNewToolbar: View {
             }
         }
         .frame(width: UIScreen.main.bounds.width, alignment: .bottom)
-        .background(Color(.sRGB, red: 0.73, green: 0.73, blue: 0.73).opacity(0.9))
         .edgesIgnoringSafeArea(.bottom)
         .sheet(isPresented: $isImagePickerDisplay) {
             ImagePicker(sourceType: self.sourceType, selectedImage: self.$selectedImage, ifAdd: $ifAdd)

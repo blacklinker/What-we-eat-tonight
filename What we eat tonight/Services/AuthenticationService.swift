@@ -14,7 +14,7 @@ class AuthenticationService{
     func login(credentials: Credentials,
                completion: @escaping (Result<Bool, Authentication.AuthenticationError>) -> Void){
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            Auth.auth().signIn(withEmail: credentials.email, password: credentials.password) { [weak self] authResult, error in
+            Auth.auth().signIn(withEmail: credentials.email, password: credentials.password) { authResult, error in
                 if authResult != nil, error == nil {
                     completion(.success(true))
                 } else {
@@ -27,7 +27,7 @@ class AuthenticationService{
     func Register(credentials: Credentials,
                   completion: @escaping (Result<Bool, Authentication.AuthenticationError>) -> Void){
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            Auth.auth().createUser(withEmail: credentials.email, password: credentials.password) { [weak self] authResult, error in
+            Auth.auth().createUser(withEmail: credentials.email, password: credentials.password) { authResult, error in
                 if authResult != nil, error == nil {
                     completion(.success(true))
                 } else {

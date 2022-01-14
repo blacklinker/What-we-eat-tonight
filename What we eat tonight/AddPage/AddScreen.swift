@@ -9,8 +9,8 @@ import SwiftUI
 
 struct AddScreen: View {
     
-    //@Binding var hideBotNav: Bool
-    
+    @Binding var myView: MyViews
+
     var body: some View {
         NavigationView{
             List{
@@ -26,12 +26,13 @@ struct AddScreen: View {
                 }
             }
            .navigationBarTitle("添加", displayMode: .inline)
+           .modifier(AppendNavBar(myView: $myView))
         }
     }
 }
 
 struct AddScreen_Previews: PreviewProvider {
     static var previews: some View {
-        AddScreen()
+        AddScreen(myView: .constant(.add))
     }
 }

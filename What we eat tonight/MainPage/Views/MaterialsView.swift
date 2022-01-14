@@ -14,7 +14,7 @@ struct MaterialsView: View {
     var body: some View {
         Button( action: {
             materialVM.getMaterials{completion in
-                self.lst = try! completion.get()
+                self.lst = completion
             }
         }) {
             Text("text")

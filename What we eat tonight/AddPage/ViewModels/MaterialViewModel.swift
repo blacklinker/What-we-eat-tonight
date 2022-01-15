@@ -9,19 +9,26 @@ import Foundation
 import Firebase
 
 class MaterialViewModel : ObservableObject{
-    @Published var materials = [Material]()
-    @Published var showProgressView = false
     
-    func getMaterials(completion: @escaping ([Material]) -> Void){
-        FirestoreService.shared.getMaterials{ (result: Result<[Material], Error>) in
-            self.showProgressView = true
+    enum State{
+        case na
+        case loading
+        case success(data: [Material])
+        case failure(error: Error)
+    }
+    
+    @Published private(set) var state: State = .na
+    
+    func getMaterials() async {
+        FirestoreService.shared.getMaterials { result in
             switch result{
-            case .success(let lst)  :
-                completion(lst)
-            case .failure:
-                return
+            case .failure(let err):
+                self.state = .failure(error: err)
+            case .success(let data):
+                self.state = .success(data: data)
             }
-            
         }
+        
+        
     }
 }

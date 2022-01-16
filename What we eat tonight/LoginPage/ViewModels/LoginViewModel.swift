@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import FirebaseAuth
 
 @MainActor
 class LoginViewModel : ObservableObject {
@@ -19,22 +20,27 @@ class LoginViewModel : ObservableObject {
         credentials.email.isEmpty || credentials.password.isEmpty
     }
     
-    func login(completion: @escaping (Bool) -> Void){
+    func login(){
         showProgressView = true
         AuthenticationService.shared.login(credentials: credentials){ [unowned self] (result: Result<Bool, Authentication.AuthenticationError>) in
             showProgressView = false
             switch result{
             case .success:
-                completion(true)
                 ifAuth = true
-            case .failure(let auth):
+            case .failure(let err):
                 self.credentials.password = ""
                 withAnimation{
-                    error = auth
+                    error = err
                 }
-                completion(false)
             }
         }
+    }
+    
+    func autoLogin(){
+        guard Auth.auth().currentUser != nil else{
+           return
+        }
+        self.ifAuth = true
     }
     
     func register(email: String, password: String, completion: @escaping (Bool) -> Void){

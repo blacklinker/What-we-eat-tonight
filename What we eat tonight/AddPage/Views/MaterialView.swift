@@ -37,19 +37,22 @@ struct MaterialView: View {
                     .background(.white)
                     .cornerRadius(15)
                 
-                Button(action: {
-                    Task{
-                        await materialVM.addMaterial(name: self.material)
-                        self.material = ""
-                    }
-                }){
-                    Text("Add Material")
-                }.font(.system(size: 12))
-                    .frame(height: 20)
-                    .padding(10)
-                    .foregroundColor(.white)
-                    .background(.green)
-                    .cornerRadius(15)
+                HStack{
+                    Spacer()
+                    Button(action: {
+                        Task{
+                            await materialVM.addMaterial(name: self.material)
+                            self.material = ""
+                        }
+                    }){
+                        Text("Add Material")
+                    }.font(.system(size: 12))
+                        .frame(height: 20)
+                        .padding(10)
+                        .foregroundColor(.white)
+                        .background(.green)
+                        .cornerRadius(15)
+                }
             }.padding()
         }
         .task {

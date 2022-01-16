@@ -36,9 +36,7 @@ struct LoginScreen: View {
             }
             
             Button(action: {
-                loginVM.login{ success in
-                    
-                }
+                loginVM.login()
             }) {
                 HStack(alignment: .center){
                     if loginVM.showProgressView {
@@ -54,13 +52,9 @@ struct LoginScreen: View {
                     .cornerRadius(15)
             }
             .disabled(loginVM.loginDisabled)
-            
+
             Button(action: {ifRegister.toggle()}){
                 Text("Register")
-            }
-            
-            Button(action: {loginVM.logOut()}){
-                Text("Sign Out")
             }
         }.padding()
         .disabled(loginVM.showProgressView)
@@ -81,6 +75,6 @@ struct LoginScreen: View {
 
 struct LoginScreen_Previews: PreviewProvider {
     static var previews: some View {
-        LoginScreen()
+        LoginScreen().environmentObject(LoginViewModel())
     }
 }

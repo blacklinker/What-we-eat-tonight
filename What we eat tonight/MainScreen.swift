@@ -9,16 +9,16 @@ import SwiftUI
 import nanopb
 
 struct MainScreen: View {
-    
-    //@State var hideBotNav: Bool = false
     @Binding var myView: MyViews
-    
     @StateObject var loginVM = LoginViewModel()
-    
+
     var body: some View {
         
         if !loginVM.ifAuth{
             LoginScreen().environmentObject(loginVM)
+                .onAppear{
+                    loginVM.autoLogin()
+                }
         } else{
             NavigationView{
                 VStack{
@@ -31,7 +31,6 @@ struct MainScreen: View {
                 }
             }
         }
-        
     }
 }
 

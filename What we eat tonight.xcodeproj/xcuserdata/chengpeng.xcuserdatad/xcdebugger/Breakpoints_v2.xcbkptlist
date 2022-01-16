@@ -142,25 +142,9 @@
             filePath = "What we eat tonight/LoginPage/ViewModels/LoginViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "27"
-            endingLineNumber = "27"
-            landmarkName = "login(completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "1787EB93-9281-49FF-8342-5B2EFE63F0D3"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "What we eat tonight/LoginPage/ViewModels/LoginViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
             startingLineNumber = "28"
             endingLineNumber = "28"
-            landmarkName = "login(completion:)"
+            landmarkName = "login()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -176,7 +160,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "31"
             endingLineNumber = "31"
-            landmarkName = "login(completion:)"
+            landmarkName = "login()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -192,7 +176,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "32"
             endingLineNumber = "32"
-            landmarkName = "login(completion:)"
+            landmarkName = "login()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -208,7 +192,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "34"
             endingLineNumber = "34"
-            landmarkName = "login(completion:)"
+            landmarkName = "login()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -238,8 +222,8 @@
             filePath = "What we eat tonight/MainScreen.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "21"
-            endingLineNumber = "21"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -260,11 +244,11 @@
             landmarkType = "24">
             <Locations>
                <Location
-                  uuid = "3FDF61CA-C7E1-4DA2-8B92-679BF830DAEA - 847d570577e9ece1"
+                  uuid = "3FDF61CA-C7E1-4DA2-8B92-679BF830DAEA - f922ec665aecd0e3"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "What_we_eat_tonight.MainScreen.body.getter : some"
+                  symbolName = "closure #2 () -&gt; SwiftUI.VStack&lt;SwiftUI._ConditionalContent&lt;SwiftUI._ConditionalContent&lt;SwiftUI.ModifiedContent&lt;What_we_eat_tonight.MainView, What_we_eat_tonight.AppendNavBar&gt;, What_we_eat_tonight.AddScreen&gt;, SwiftUI._ConditionalContent&lt;SwiftUI.ModifiedContent&lt;What_we_eat_tonight.MainView, What_we_eat_tonight.AppendNavBar&gt;, SwiftUI.ModifiedContent&lt;What_we_eat_tonight.MainView, What_we_eat_tonight.AppendNavBar&gt;&gt;&gt;&gt; in What_we_eat_tonight.MainScreen.body.getter : some"
                   moduleName = "What we eat tonight"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/chengpeng/My%20Apps/What%20we%20eat%20tonight/What%20we%20eat%20tonight/MainScreen.swift"
@@ -272,14 +256,14 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "24"
                   endingLineNumber = "24"
-                  offsetFromSymbolStart = "952">
+                  offsetFromSymbolStart = "180">
                </Location>
                <Location
-                  uuid = "3FDF61CA-C7E1-4DA2-8B92-679BF830DAEA - 1ffdd7ccc45c033"
+                  uuid = "3FDF61CA-C7E1-4DA2-8B92-679BF830DAEA - bf35e015ca7e52ee"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; SwiftUI._ConditionalContent&lt;SwiftUI._ConditionalContent&lt;SwiftUI.ModifiedContent&lt;What_we_eat_tonight.MainView, What_we_eat_tonight.AppendNavBar&gt;, SwiftUI.ModifiedContent&lt;What_we_eat_tonight.AddScreen, What_we_eat_tonight.AppendNavBar&gt;&gt;, SwiftUI._ConditionalContent&lt;&lt;&lt;opaque return type of SwiftUI.View.environmentObject&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Combine.ObservableObject&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0, SwiftUI.ModifiedContent&lt;What_we_eat_tonight.MainView, What_we_eat_tonight.AppendNavBar&gt;&gt;&gt; in What_we_eat_tonight.MainScreen.body.getter : some"
+                  symbolName = "closure #1 () -&gt; SwiftUI._ConditionalContent&lt;SwiftUI._ConditionalContent&lt;SwiftUI.ModifiedContent&lt;What_we_eat_tonight.MainView, What_we_eat_tonight.AppendNavBar&gt;, What_we_eat_tonight.AddScreen&gt;, SwiftUI._ConditionalContent&lt;SwiftUI.ModifiedContent&lt;What_we_eat_tonight.MainView, What_we_eat_tonight.AppendNavBar&gt;, SwiftUI.ModifiedContent&lt;What_we_eat_tonight.MainView, What_we_eat_tonight.AppendNavBar&gt;&gt;&gt; in closure #2 () -&gt; SwiftUI.VStack&lt;SwiftUI._ConditionalContent&lt;SwiftUI._ConditionalContent&lt;SwiftUI.ModifiedContent&lt;What_we_eat_tonight.MainView, What_we_eat_tonight.AppendNavBar&gt;, What_we_eat_tonight.AddScreen&gt;, SwiftUI._ConditionalContent&lt;SwiftUI.ModifiedContent&lt;What_we_eat_tonight.MainView, What_we_eat_tonight.AppendNavBar&gt;, SwiftUI.ModifiedContent&lt;What_we_eat_tonight.MainView, What_we_eat_tonight.AppendNavBar&gt;&gt;&gt;&gt; in What_we_eat_tonight.MainScreen.body.getter : some"
                   moduleName = "What we eat tonight"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/chengpeng/My%20Apps/What%20we%20eat%20tonight/What%20we%20eat%20tonight/MainScreen.swift"
@@ -287,7 +271,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "24"
                   endingLineNumber = "24"
-                  offsetFromSymbolStart = "4048">
+                  offsetFromSymbolStart = "2896">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -359,115 +343,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "3CEC81E8-D879-4D72-AA77-BE832BB9EA37"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "What we eat tonight/MainScreen.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "14"
-            endingLineNumber = "14"
-            landmarkName = "MainScreen"
-            landmarkType = "14">
-            <Locations>
-               <Location
-                  uuid = "3CEC81E8-D879-4D72-AA77-BE832BB9EA37 - f82236551e446335"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "What_we_eat_tonight.MainScreen.myView.getter : What_we_eat_tonight.MyViews"
-                  moduleName = "What we eat tonight"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/chengpeng/My%20Apps/What%20we%20eat%20tonight/What%20we%20eat%20tonight/MainScreen.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "14"
-                  endingLineNumber = "14"
-                  offsetFromSymbolStart = "136">
-               </Location>
-               <Location
-                  uuid = "3CEC81E8-D879-4D72-AA77-BE832BB9EA37 - b92e598099b1b729"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "What_we_eat_tonight.MainScreen.myView.setter : What_we_eat_tonight.MyViews"
-                  moduleName = "What we eat tonight"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/chengpeng/My%20Apps/What%20we%20eat%20tonight/What%20we%20eat%20tonight/MainScreen.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "14"
-                  endingLineNumber = "14"
-                  offsetFromSymbolStart = "132">
-               </Location>
-               <Location
-                  uuid = "3CEC81E8-D879-4D72-AA77-BE832BB9EA37 - fb30ffb6d60ded18"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "What_we_eat_tonight.MainScreen.myView.modify : What_we_eat_tonight.MyViews"
-                  moduleName = "What we eat tonight"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/chengpeng/My%20Apps/What%20we%20eat%20tonight/%3Ccompiler-generated%3E"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "48">
-               </Location>
-               <Location
-                  uuid = "3CEC81E8-D879-4D72-AA77-BE832BB9EA37 - 457367973f8a61b8"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "What_we_eat_tonight.MainScreen.myView.modify : What_we_eat_tonight.MyViews with unmangled suffix &quot;.resume.0&quot;"
-                  moduleName = "What we eat tonight"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/chengpeng/My%20Apps/What%20we%20eat%20tonight/What%20we%20eat%20tonight/MainScreen.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "14"
-                  endingLineNumber = "14"
-                  offsetFromSymbolStart = "32">
-               </Location>
-               <Location
-                  uuid = "3CEC81E8-D879-4D72-AA77-BE832BB9EA37 - 31675c35dbae75f1"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "What_we_eat_tonight.MainScreen.$myView.getter : SwiftUI.Binding&lt;What_we_eat_tonight.MyViews&gt;"
-                  moduleName = "What we eat tonight"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/chengpeng/My%20Apps/What%20we%20eat%20tonight/What%20we%20eat%20tonight/MainScreen.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "14"
-                  endingLineNumber = "14"
-                  offsetFromSymbolStart = "160">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "C45303F7-8D9E-4802-B6DC-710FF80CA60B"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "What we eat tonight/MainScreen.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "13"
-            endingLineNumber = "13"
-            landmarkName = "MainScreen"
-            landmarkType = "14">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "0FACBFF5-A083-419E-9A1E-562CB0CA8A8E"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -491,8 +366,8 @@
             filePath = "What we eat tonight/MainScreen.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "16"
-            endingLineNumber = "16"
+            startingLineNumber = "13"
+            endingLineNumber = "13"
             landmarkName = "MainScreen"
             landmarkType = "14">
          </BreakpointContent>
@@ -511,38 +386,6 @@
             endingLineNumber = "25"
             landmarkName = "body"
             landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "373F1E0D-25F4-4035-80CB-A9DF338C024E - 847d570577e9ece1"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "What_we_eat_tonight.MainScreen.body.getter : some"
-                  moduleName = "What we eat tonight"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/chengpeng/My%20Apps/What%20we%20eat%20tonight/What%20we%20eat%20tonight/MainScreen.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "24"
-                  endingLineNumber = "24"
-                  offsetFromSymbolStart = "952">
-               </Location>
-               <Location
-                  uuid = "373F1E0D-25F4-4035-80CB-A9DF338C024E - 1ffdd7ccc45c033"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; SwiftUI._ConditionalContent&lt;SwiftUI._ConditionalContent&lt;SwiftUI.ModifiedContent&lt;What_we_eat_tonight.MainView, What_we_eat_tonight.AppendNavBar&gt;, SwiftUI.ModifiedContent&lt;What_we_eat_tonight.AddScreen, What_we_eat_tonight.AppendNavBar&gt;&gt;, SwiftUI._ConditionalContent&lt;&lt;&lt;opaque return type of SwiftUI.View.environmentObject&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Combine.ObservableObject&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0, SwiftUI.ModifiedContent&lt;What_we_eat_tonight.MainView, What_we_eat_tonight.AppendNavBar&gt;&gt;&gt; in What_we_eat_tonight.MainScreen.body.getter : some"
-                  moduleName = "What we eat tonight"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/chengpeng/My%20Apps/What%20we%20eat%20tonight/What%20we%20eat%20tonight/MainScreen.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "24"
-                  endingLineNumber = "24"
-                  offsetFromSymbolStart = "4048">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -555,8 +398,8 @@
             filePath = "What we eat tonight/LoginPage/ViewModels/LoginViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "16"
-            endingLineNumber = "16"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
             landmarkName = "LoginViewModel"
             landmarkType = "3">
          </BreakpointContent>
@@ -571,8 +414,8 @@
             filePath = "What we eat tonight/LoginPage/ViewModels/LoginViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
             landmarkName = "register(email:password:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -827,6 +670,22 @@
             startingLineNumber = "45"
             endingLineNumber = "45"
             landmarkName = "addMaterial(name:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B786EBD7-1733-4AA7-8C20-94AA2EB6371B"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "What we eat tonight/LoginPage/ViewModels/LoginViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "autoLogin()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

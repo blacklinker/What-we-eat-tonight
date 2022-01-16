@@ -13,9 +13,8 @@ struct RowView: View {
         HStack(alignment: .center){
             Image(uiImage: UIImage(named: "CantFindImage.jpg")!)
                 .resizable()
-                //.cornerRadius(20)
                 .frame(width: 100, height: 100, alignment: .center).overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.gray))
-            Text("找不到菜谱")
+            Text("Can't find recipe")
             Spacer()
         }.padding()
     }

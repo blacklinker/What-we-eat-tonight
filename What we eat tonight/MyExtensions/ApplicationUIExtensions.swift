@@ -35,10 +35,13 @@ struct TopNavBarStyle: ViewModifier{
     func body(content: Content) -> some View {
         if isSeleced{
             content
+                .padding(7)
                 .foregroundColor(.white)
-                .background(RoundedRectangle(cornerRadius: 25).frame(width: 70, height: 30))
+                .background(.blue)
+                .cornerRadius(25)
         }else{
             content
+                .padding(7)
         }
     }
 }
@@ -59,5 +62,13 @@ struct MyButtonStyle: ButtonStyle{
     
     var buttonColor: Color {
         validated ? .green : .gray
+    }
+}
+
+extension String {
+   func widthOfString(usingFont font: UIFont) -> CGFloat {
+        let fontAttributes = [NSAttributedString.Key.font: font]
+        let size = self.size(withAttributes: fontAttributes)
+        return size.width
     }
 }

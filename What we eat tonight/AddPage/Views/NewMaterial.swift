@@ -10,7 +10,7 @@ import SwiftUI
 struct NewMaterial: View {
     var body: some View {
         VStack{
-            Text("材料").font(.title)
+            Text("Materials").font(.title)
             Divider()
             MaterialView()
         }.padding().background(Color(.sRGB, red: 0.73, green: 0.73, blue: 0.73).opacity(0.5))

@@ -7,6 +7,8 @@
 
 import Foundation
 import FirebaseAuth
+import Firebase
+import FirebaseStorage
 
 class AuthenticationService{
     static let shared = AuthenticationService()
@@ -27,9 +29,16 @@ class AuthenticationService{
     func Register(credentials: Credentials,
                   completion: @escaping (Result<Bool, Authentication.AuthenticationError>) -> Void){
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            Auth.auth().createUser(withEmail: credentials.email, password: credentials.password) { authResult, error in
+            Auth.auth().createUser(withEmail: credentials.email, password: credentials.password) { [self] authResult, error in
                 if authResult != nil, error == nil {
-                    completion(.success(true))
+                    self.addUserToDB(userID: authResult?.user.uid) { result in
+                        switch result{
+                        case .failure:
+                            completion(.failure(.invalidUserCreation))
+                        case .success:
+                            completion(.success(true))
+                        }
+                    }
                 } else {
                     completion(.failure(.invalidUserCreation))
                 }
@@ -37,10 +46,24 @@ class AuthenticationService{
         }
     }
     
+    func addUserToDB(userID: String?, completion: @escaping (Result<Bool, Error>) -> Void){
+        guard userID != nil else {
+            return
+        }
+        Firestore.firestore().collection("Users")
+            .addDocument(data: ["userid": userID!]) { err in
+                if let err = err {
+                    completion(.failure(err))
+                }else{
+                    completion(.success(true))
+                }
+            }
+    }
+    
     
     func logOut(){
         DispatchQueue.main.asyncAfter(deadline: .now() + 1){
-           try? Auth.auth().signOut()
+            try? Auth.auth().signOut()
         }
     }
 }

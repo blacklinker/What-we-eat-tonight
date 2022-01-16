@@ -24,14 +24,14 @@ struct AddNewToolbar: View {
                     self.isImagePickerDisplay.toggle()
                     
                 }){
-                    Text("拍摄").frame(width: UIScreen.main.bounds.width, height: 40).background(.white)
+                    Text("Take photo").frame(width: UIScreen.main.bounds.width, height: 40).background(.white)
                 }
                 Divider()
                 Button(action: {
                     self.sourceType = .photoLibrary
                     self.isImagePickerDisplay.toggle()
                 }){
-                    Text("从手机相册选择").frame(width: UIScreen.main.bounds.width, height: 40).background(.white)
+                    Text("Select from library").frame(width: UIScreen.main.bounds.width, height: 40).background(.white)
                 }
             }
             Divider()

@@ -16,25 +16,25 @@ struct BottomNav: View {
             Button(action: { myView = .main }){
                 VStack(alignment: .center, spacing: 10){
                     Image(systemName: "house")
-                    Text("主页")
+                    Text("Main")
                 }.foregroundColor(myView == .main ? .black : .gray)
             }
             Button(action: { myView = .add }){
                 VStack(alignment: .center, spacing: 10){
                     Image(systemName: "plus.app")
-                    Text("添加")
+                    Text("Add")
                 }.foregroundColor(myView == .add ? .black : .gray)
             }
             Button(action: { myView = .search }){
                 VStack(alignment: .center, spacing: 10){
                     Image(systemName: "magnifyingglass")
-                    Text("搜索")
+                    Text("Search")
                 }.foregroundColor(myView == .search ? .black : .gray)
             }
             Button(action: { myView = .settings }){
                 VStack(alignment: .center, spacing: 10){
                     Image(systemName: "person.crop.circle")
-                    Text("账号")
+                    Text("Account")
                 }.foregroundColor(.blue)
             }
         }.font(.system(size: 13))

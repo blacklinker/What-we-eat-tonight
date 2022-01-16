@@ -18,7 +18,10 @@ struct MaterialView: View {
                 switch materialVM.state{
                 case .success:
                     ForEach(materialVM.materialList!, id: \.id){ material in
-                        MaterialEdit(name: material.name)
+                        withAnimation{
+                            MaterialEdit(material: material).environmentObject(materialVM)
+                                .animation(.easeInOut, value: 4)
+                        }
                     }
                 case .loading:
                     ProgressView().padding()
@@ -36,7 +39,7 @@ struct MaterialView: View {
                 
                 Button(action: {
                     Task{
-                        await materialVM.addMaterials(name: self.material)
+                        await materialVM.addMaterial(name: self.material)
                         self.material = ""
                     }
                 }){
@@ -47,8 +50,9 @@ struct MaterialView: View {
                     .foregroundColor(.white)
                     .background(.green)
                     .cornerRadius(15)
-            }
-        }.task {
+            }.padding()
+        }
+        .task {
             await materialVM.getMaterials()
         }
     }

@@ -11,15 +11,15 @@ struct TopNav: View {
     @Binding var subView: SubViews
     
     var body: some View {
-        HStack(alignment: .center, spacing: 30){
+        HStack(alignment: .center, spacing: 20){
             Button(action: { subView = .recipe }){
-                Text("菜谱").modifier(subView == .recipe ? TopNavBarStyle(isSeleced: true) : TopNavBarStyle(isSeleced: false))
+                Text("Recipe").modifier(subView == .recipe ? TopNavBarStyle(isSeleced: true) : TopNavBarStyle(isSeleced: false))
             }
             Button(action: { subView = .eat }){
-            Text("吃什么").modifier(subView == .eat ? TopNavBarStyle(isSeleced: true) : TopNavBarStyle(isSeleced: false))
+                Text("What we eat").modifier(subView == .eat ? TopNavBarStyle(isSeleced: true) : TopNavBarStyle(isSeleced: false))
             }
             Button(action: { subView = .material }){
-            Text("材料").modifier(subView == .material ? TopNavBarStyle(isSeleced: true) : TopNavBarStyle(isSeleced: false))
+            Text("Material").modifier(subView == .material ? TopNavBarStyle(isSeleced: true) : TopNavBarStyle(isSeleced: false))
             }
         }
         .frame(width: UIScreen.main.bounds.width)

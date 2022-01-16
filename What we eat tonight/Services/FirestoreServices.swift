@@ -29,7 +29,6 @@ class FirestoreService{
                 }
                 completion(.success(materials))
             })
-            
         }
     }
     
@@ -42,6 +41,18 @@ class FirestoreService{
                     }
                 }
             completion(.success(doc.documentID))
+        }
+    }
+    
+    func deleteMaterial(docId: String, completion: @escaping (Result<Bool, Error>) -> Void){
+        DispatchQueue.main.asyncAfter(deadline: .now()) {
+            Firestore.firestore().collection("Materials").document(docId).delete(){ err in
+                if let err = err{
+                    completion(.failure(err))
+                }else{
+                    completion(.success(true))
+                }
+            }
         }
     }
 }

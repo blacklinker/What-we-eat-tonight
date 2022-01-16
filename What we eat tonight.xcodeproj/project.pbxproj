@@ -260,8 +260,8 @@
 				65413756278F76A900C585D1 /* ImageView.swift */,
 				655D9BA22787865300CA8F82 /* AddNewTopNav.swift */,
 				655D9B9E27876E9C00CA8F82 /* MaterialView.swift */,
-				6576C3DA278649A5000B6127 /* AddNewToolbar.swift */,
 				65C48C7F2793CBB7009F7EE0 /* MaterialEdit.swift */,
+				6576C3DA278649A5000B6127 /* AddNewToolbar.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

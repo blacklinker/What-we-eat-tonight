@@ -17,9 +17,9 @@ struct MainScreen: View {
     
     var body: some View {
         
-//        if !loginVM.ifAuth{
-//            LoginScreen().environmentObject(loginVM)
-//        } else{
+        if !loginVM.ifAuth{
+            LoginScreen().environmentObject(loginVM)
+        } else{
             NavigationView{
                 VStack{
                     switch myView{
@@ -30,7 +30,7 @@ struct MainScreen: View {
                     }
                 }
             }
-        //}
+        }
         
     }
 }

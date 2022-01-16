@@ -8,16 +8,23 @@
 import SwiftUI
 
 struct MaterialsView: View {
-    @StateObject var materialVM = MaterialViewModel()
-    @State var lst = [Material]()
-
+    @StateObject private var materialVM = MaterialViewModel()
+    
     var body: some View {
-        Button( action: {
-            materialVM.getMaterials{completion in
-                self.lst = completion
+        VStack{
+            switch materialVM.state{
+            case .success:
+                ForEach(materialVM.materialList! , id: \.id){ material in
+                    Text(material.name)
+                }
+            case .loading:
+                ProgressView().padding()
+            default:
+                Text("Something went wrong.")
             }
-        }) {
-            Text("text")
+        }
+        .task{
+            await materialVM.getMaterials()
         }
     }
 }

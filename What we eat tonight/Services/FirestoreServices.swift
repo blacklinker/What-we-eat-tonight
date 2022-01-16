@@ -11,7 +11,7 @@ import FirebaseStorage
 
 class FirestoreService{
     static let shared = FirestoreService()
-
+    
     func getMaterials(completion: @escaping (Result<[Material], Error>) -> Void){
         DispatchQueue.main.asyncAfter(deadline: .now() + 1){
             Firestore.firestore().collection("Materials").getDocuments(completion: { querySnapshot, err in
@@ -20,18 +20,28 @@ class FirestoreService{
                     return
                 }
                 
-                let decoder = JSONDecoder()
-                for document in querySnapshot.documents {
-                            print("\(document.documentID) => \(document.data())")
-                        }
-                
-    
-                 if let data = try?  JSONSerialization.data(withJSONObject: querySnapshot, options: []) {
-                   let materials = try? decoder.decode([Material].self, from: data)
-                     completion(.success(materials!))
-                   }
+                let materials = querySnapshot.documents.map { queryDocumentSnapshot -> Material in
+                    let data = queryDocumentSnapshot.data()
+                    let name = data["name"] as? String ?? ""
+                    let id = queryDocumentSnapshot.documentID
+                    
+                    return Material(id: id, name: name)
+                }
+                completion(.success(materials))
             })
-                
-            }
+            
         }
     }
+    
+    func addMaterial(name: String, completion: @escaping (Result<String, Error>) -> Void){
+        DispatchQueue.main.asyncAfter(deadline: .now()+1){
+            let doc = Firestore.firestore().collection("Materials")
+                .addDocument(data: ["name": name]) { err in
+                    if let err = err {
+                        completion(.failure(err))
+                    }
+                }
+            completion(.success(doc.documentID))
+        }
+    }
+}

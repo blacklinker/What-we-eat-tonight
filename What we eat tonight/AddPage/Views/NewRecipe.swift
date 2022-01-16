@@ -20,7 +20,7 @@ struct NewRecipe: View {
     var body: some View {
         ZStack {
             VStack(alignment: .leading){
-                TextField("菜名", text: $name)
+                TextField("Name", text: $name)
                     .font(.system(size: 15))
                     .frame(height: 30)
                     .padding(10)
@@ -37,12 +37,12 @@ struct NewRecipe: View {
                     Spacer()
                     Button(action: {
                     }){
-                        Text("保存")
+                        Text("Save")
                     }.buttonStyle(MyButtonStyle(validated: validated))
                 }
                 Divider()
-                Text("材料").font(.title)
-                MaterialView(materials: $materials, material: $material)
+                Text("Materials").font(.title)
+                MaterialView()
                 Spacer()
             }
             .padding().background(Color(.sRGB, red: 0.73, green: 0.73, blue: 0.73).opacity(0.5))

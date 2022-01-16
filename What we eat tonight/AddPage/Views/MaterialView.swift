@@ -9,44 +9,53 @@ import SwiftUI
 
 struct MaterialView: View {
     
-    @Binding var materials: [String]
-    @Binding var material: String
+    @StateObject var materialVM = MaterialViewModel()
+    @State var material: String = ""
     
     var body: some View {
         ScrollView(.vertical ,showsIndicators: true){
             VStack(alignment: .leading){
-                ForEach(materials, id: \.self){ material in
-                    Text(material)
-                        .padding(10)
-                        .background(.white)
-                        .cornerRadius(15)
+                switch materialVM.state{
+                case .success:
+                    ForEach(materialVM.materialList!, id: \.id){ material in
+                        MaterialEdit(name: material.name)
+                    }
+                case .loading:
+                    ProgressView().padding()
+                default:
+                    Text("Something went wrong")
                 }
                 
-                TextField("材料", text: $material)
+                TextField("Materials", text: $material)
+                    .autocapitalization(.none)
                     .font(.system(size: 15))
                     .frame(height: 30)
                     .padding(10)
                     .background(.white)
                     .cornerRadius(15)
                 
-                    Button(action: {
-                        materials.append(material)
+                Button(action: {
+                    Task{
+                        await materialVM.addMaterials(name: self.material)
                         self.material = ""
-                    }){
-                        Text("添加材料")
-                    }.font(.system(size: 12))
-                        .frame(height: 20)
-                        .padding(10)
-                        .foregroundColor(.white)
-                        .background(.green)
-                        .cornerRadius(15)
+                    }
+                }){
+                    Text("Add Material")
+                }.font(.system(size: 12))
+                    .frame(height: 20)
+                    .padding(10)
+                    .foregroundColor(.white)
+                    .background(.green)
+                    .cornerRadius(15)
             }
+        }.task {
+            await materialVM.getMaterials()
         }
     }
 }
 
 struct MaterialView_Previews: PreviewProvider {
     static var previews: some View {
-        MaterialView(materials: .constant([]), material: .constant(""))
+        MaterialView()
     }
 }

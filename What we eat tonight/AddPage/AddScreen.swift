@@ -16,16 +16,16 @@ struct AddScreen: View {
             List{
                 NavigationLink(destination: NewRecipe()){
                     HStack{
-                        Text("菜谱").font(.system(size: 15))
+                        Text("Recipes").font(.system(size: 15))
                     }.padding()
                 }
                 NavigationLink(destination:  NewMaterial()){
                     HStack{
-                        Text("材料").font(.system(size: 15))
+                        Text("Materials").font(.system(size: 15))
                     }.padding()
                 }
             }
-           .navigationBarTitle("添加", displayMode: .inline)
+           .navigationBarTitle("Add", displayMode: .inline)
            .modifier(AppendNavBar(myView: $myView))
         }
     }

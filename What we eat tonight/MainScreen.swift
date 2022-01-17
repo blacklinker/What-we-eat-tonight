@@ -11,7 +11,7 @@ import nanopb
 struct MainScreen: View {
     @Binding var myView: MyViews
     @StateObject var loginVM = LoginViewModel()
-
+    
     var body: some View {
         
         if !loginVM.ifAuth{

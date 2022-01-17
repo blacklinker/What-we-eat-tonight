@@ -18,43 +18,50 @@ class MaterialViewModel : ObservableObject{
     }
     
     @Published private(set) var state: State = .loading
-    @Published private(set) var materialList: [Material]?
+    @Published private(set) var materialList: [Material] = [Material]()
     
     func getMaterials() async{
-        FirestoreService.shared.getMaterials { result in
-            switch result{
-            case .failure(let err):
-                self.state = .failure(error: err)
-            case .success(let data):
-                self.state = .success
-                self.materialList = data
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+            FirestoreService.shared.getMaterials { [unowned self] result in
+                switch result{
+                case .failure(let err):
+                    self.state = .failure(error: err)
+                case .success(let data):
+                    self.state = .success
+                    withAnimation{
+                        self.materialList = data
+                    }
+                }
             }
         }
     }
     
     func addMaterial(name: String) async {
-        FirestoreService.shared.addMaterial(name: name) { result in
-            switch result{
-            case .failure(let err):
-                self.state = .failure(error: err)
-            case .success(let docId):
-                self.state = .success
-                withAnimation {
-                    self.materialList?.append(Material(id: docId, name: name))
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+            FirestoreService.shared.addMaterial(name: name) { [unowned self] result in
+                switch result{
+                case .failure(let err):
+                    self.state = .failure(error: err)
+                case .success:
+                    self.state = .success
                 }
             }
         }
     }
     
     func deleteMaterial(id: String) async {
-        FirestoreService.shared.deleteMaterial(docId: id) { result in
-            switch result{
-            case .success:
-                withAnimation{
-                    self.materialList?.removeAll(where: { $0.id == id })
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+            FirestoreService.shared.deleteMaterial(docId: id) { [unowned self] result in
+                switch result{
+                case .success:
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+                        withAnimation{
+                            self.materialList.removeAll(where: { $0.id == id })
+                        }
+                    }
+                case .failure(let err):
+                    self.state = .failure(error: err)
                 }
-            case .failure(let err):
-                self.state = .failure(error: err)
             }
         }
     }

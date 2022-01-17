@@ -13,45 +13,39 @@ class FirestoreService{
     static let shared = FirestoreService()
     
     func getMaterials(completion: @escaping (Result<[Material], Error>) -> Void){
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1){
-            Firestore.firestore().collection("Materials").getDocuments(completion: { querySnapshot, err in
-                guard err == nil, let querySnapshot = querySnapshot else {
-                    completion(.failure(err!))
-                    return
-                }
+        Firestore.firestore().collection("Materials").addSnapshotListener{ querySnapshot, err in
+            guard err == nil, let querySnapshot = querySnapshot else {
+                completion(.failure(err!))
+                return
+            }
+            
+            let materials = querySnapshot.documents.map { queryDocumentSnapshot -> Material in
+                let data = queryDocumentSnapshot.data()
+                let name = data["name"] as? String ?? ""
+                let id = queryDocumentSnapshot.documentID
                 
-                let materials = querySnapshot.documents.map { queryDocumentSnapshot -> Material in
-                    let data = queryDocumentSnapshot.data()
-                    let name = data["name"] as? String ?? ""
-                    let id = queryDocumentSnapshot.documentID
-                    
-                    return Material(id: id, name: name)
-                }
-                completion(.success(materials))
-            })
+                return Material(id: id, name: name)
+            }
+            completion(.success(materials))
         }
     }
     
     func addMaterial(name: String, completion: @escaping (Result<String, Error>) -> Void){
-        DispatchQueue.main.asyncAfter(deadline: .now()+1){
-            let doc = Firestore.firestore().collection("Materials")
-                .addDocument(data: ["name": name]) { err in
-                    if let err = err {
-                        completion(.failure(err))
-                    }
+        let doc = Firestore.firestore().collection("Materials")
+            .addDocument(data: ["name": name]) { err in
+                if let err = err {
+                    completion(.failure(err))
                 }
-            completion(.success(doc.documentID))
-        }
+            }
+        completion(.success(doc.documentID))
     }
     
     func deleteMaterial(docId: String, completion: @escaping (Result<Bool, Error>) -> Void){
-        DispatchQueue.main.asyncAfter(deadline: .now()) {
-            Firestore.firestore().collection("Materials").document(docId).delete(){ err in
-                if let err = err{
-                    completion(.failure(err))
-                }else{
-                    completion(.success(true))
-                }
+        Firestore.firestore().collection("Materials").document(docId).delete(){ err in
+            if let err = err{
+                completion(.failure(err))
+            }else{
+                completion(.success(true))
             }
         }
     }

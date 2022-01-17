@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct AddScreen: View {
-    
     @Binding var myView: MyViews
 
     var body: some View {

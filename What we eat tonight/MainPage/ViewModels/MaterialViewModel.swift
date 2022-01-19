@@ -18,7 +18,7 @@ class MaterialViewModel : ObservableObject{
     }
     
     @Published private(set) var state: State = .loading
-    @Published private(set) var materialList: [Material] = [Material]()
+    @Published var materialList: [Material] = [Material]()
     
     func getMaterials() async{
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
@@ -27,10 +27,8 @@ class MaterialViewModel : ObservableObject{
                 case .failure(let err):
                     self.state = .failure(error: err)
                 case .success(let data):
+                    self.materialList = data
                     self.state = .success
-                    withAnimation{
-                        self.materialList = data
-                    }
                 }
             }
         }
@@ -42,7 +40,10 @@ class MaterialViewModel : ObservableObject{
                 switch result{
                 case .failure(let err):
                     self.state = .failure(error: err)
-                case .success:
+                case .success(let docID):
+                    withAnimation{
+                        self.materialList.append(Material(id: docID, name: name))
+                    }
                     self.state = .success
                 }
             }
@@ -50,19 +51,21 @@ class MaterialViewModel : ObservableObject{
     }
     
     func deleteMaterial(id: String) async {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
-            FirestoreService.shared.deleteMaterial(docId: id) { [unowned self] result in
-                switch result{
-                case .success:
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
-                        withAnimation{
-                            self.materialList.removeAll(where: { $0.id == id })
-                        }
+        FirestoreService.shared.deleteMaterial(docId: id) { [unowned self] result in
+            switch result{
+            case .success:
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+                    withAnimation{
+                        self.materialList.removeAll(where: { $0.id == id })
                     }
-                case .failure(let err):
-                    self.state = .failure(error: err)
                 }
+            case .failure(let err):
+                self.state = .failure(error: err)
             }
         }
+    }
+    
+    deinit{
+        print("MaterialViewModel is destoryed")
     }
 }

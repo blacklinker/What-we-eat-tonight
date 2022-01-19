@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct AddScreen: View {
-    @Binding var myView: MyViews
-
     var body: some View {
         NavigationView{
             List{
@@ -25,13 +23,12 @@ struct AddScreen: View {
                 }
             }
            .navigationBarTitle("Add", displayMode: .inline)
-           .modifier(AppendNavBar(myView: $myView))
         }
     }
 }
 
 struct AddScreen_Previews: PreviewProvider {
     static var previews: some View {
-        AddScreen(myView: .constant(.add))
+        AddScreen()
     }
 }

@@ -40,7 +40,7 @@ struct AddNewToolbar: View {
                     ifAdd = false
                 }
             }){
-                Text("取消").frame(width: UIScreen.main.bounds.width, height: 60, alignment: .center).background(.white)
+                Text("Cancel").frame(width: UIScreen.main.bounds.width, height: 60, alignment: .center).background(.white)
             }
         }
         .frame(width: UIScreen.main.bounds.width, alignment: .bottom)

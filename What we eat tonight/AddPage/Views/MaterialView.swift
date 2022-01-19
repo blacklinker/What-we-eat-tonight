@@ -8,26 +8,37 @@
 import SwiftUI
 
 struct MaterialView: View {
-    
     @StateObject var materialVM = MaterialViewModel()
     @State var material: String = ""
     
     var body: some View {
-        VStack(alignment: .leading){
-            ScrollView(.vertical ,showsIndicators: true){
-                switch materialVM.state{
-                case .success:
-                    ForEach(materialVM.materialList, id: \.id){ material in
-                        MaterialEdit(material: material).environmentObject(materialVM)
-                            .animation(.easeInOut, value: 4)
+        VStack{
+            switch materialVM.state{
+            case .success:
+                List{
+                    ForEach(materialVM.materialList){ material in
+                        Text(material.name).swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                            Button(role: .destructive){
+                                Task{
+                                    await materialVM.deleteMaterial(id: material.id)
+                                }
+                            } label: {
+                                Image(systemName: "trash")
+                            }
+                        }
                     }
-                case .loading:
+                }.environmentObject(materialVM)
+                    .background(.white)
+                
+            case .loading:
+                VStack{
+                    Spacer()
                     ProgressView().padding()
-                default:
-                    Text("Something went wrong")
-                }
+                    Spacer()
+                }.frame(maxWidth: .infinity)
+            default:
+                Text("Something went wrong")
             }
-            Divider()
             AddBotMaterial(material: $material).environmentObject(materialVM)
         }
         .task {

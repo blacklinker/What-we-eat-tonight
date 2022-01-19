@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Material : Codable {
+struct Material : Codable, Identifiable {
     var id: String
     var name: String
 }

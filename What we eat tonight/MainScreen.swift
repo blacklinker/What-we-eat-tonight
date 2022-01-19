@@ -13,7 +13,6 @@ struct MainScreen: View {
     @StateObject var loginVM = LoginViewModel()
     
     var body: some View {
-        
         if !loginVM.ifAuth{
             LoginScreen().environmentObject(loginVM)
                 .onAppear{
@@ -24,8 +23,10 @@ struct MainScreen: View {
                 VStack{
                     switch myView{
                     case .main: MainView().modifier(AppendNavBar(myView: $myView))
-                    case .add: AddScreen(myView: $myView)
-                    case .settings: MainView().modifier(AppendNavBar(myView: $myView))
+                    case .add: AddScreen().modifier(AppendNavBar(myView: $myView))
+                    case .settings: SettingScreen()
+                            .modifier(AppendNavBar(myView: $myView))
+                            .environmentObject(loginVM)
                     case .search: MainView().modifier(AppendNavBar(myView: $myView))
                     }
                 }

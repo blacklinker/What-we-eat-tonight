@@ -13,13 +13,14 @@ struct AddBotMaterial: View {
     
     var body: some View {
         VStack{
-            TextField("Materials", text: $material)
+            TextField("Material Name", text: $material)
                 .autocapitalization(.none)
                 .font(.system(size: 15))
                 .frame(height: 30)
-                .padding(10)
-                .background(.white)
-                .cornerRadius(15)
+                .padding(.leading, 10)
+                .overlay(RoundedRectangle(cornerRadius: 20)
+                            .stroke(Color(.sRGB, red: 0.73, green: 0.73, blue: 0.73), lineWidth: 2)
+                )
             
             HStack{
                 Spacer()
@@ -29,15 +30,18 @@ struct AddBotMaterial: View {
                         self.material = ""
                     }
                 }){
-                    Text("Add Material")
+                    Text("Add").font(.system(size: 15))
                 }.font(.system(size: 12))
                     .frame(height: 20)
-                    .padding(10)
+                    .padding(.leading, 18)
+                    .padding(.trailing, 18)
+                    .padding(.top, 7)
+                    .padding(.bottom, 7)
                     .foregroundColor(.white)
                     .background(.green)
                     .cornerRadius(15)
             }
-        }
+        }.padding(10)
     }
 }
 

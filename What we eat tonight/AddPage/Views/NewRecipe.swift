@@ -50,8 +50,6 @@ struct NewRecipe: View {
             if(ifAdd){
                 AddNewToolbar(selectedImage: $selectedImage, ifAdd: $ifAdd).transition(.move(edge: .bottom))
             }
-            
-            
         }
     }
     

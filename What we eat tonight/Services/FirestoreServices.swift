@@ -13,7 +13,7 @@ class FirestoreService{
     static let shared = FirestoreService()
     
     func getMaterials(completion: @escaping (Result<[Material], Error>) -> Void){
-        Firestore.firestore().collection("Materials").addSnapshotListener{ querySnapshot, err in
+        Firestore.firestore().collection("Materials").getDocuments(completion: { querySnapshot, err in
             guard err == nil, let querySnapshot = querySnapshot else {
                 completion(.failure(err!))
                 return
@@ -27,7 +27,7 @@ class FirestoreService{
                 return Material(id: id, name: name)
             }
             completion(.success(materials))
-        }
+        })
     }
     
     func addMaterial(name: String, completion: @escaping (Result<String, Error>) -> Void){

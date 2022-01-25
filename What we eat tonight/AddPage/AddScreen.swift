@@ -9,8 +9,6 @@ import SwiftUI
 
 struct AddScreen: View {
     
-    @Binding var myView: MyViews
-
     var body: some View {
         NavigationView{
             List{
@@ -21,18 +19,30 @@ struct AddScreen: View {
                 }
                 NavigationLink(destination:  NewMaterial()){
                     HStack{
-                        Text("Materials").font(.system(size: 15))
+                        Text("Material").font(.system(size: 15))
                     }.padding()
                 }
             }
            .navigationBarTitle("Add", displayMode: .inline)
-           .modifier(AppendNavBar(myView: $myView))
         }
     }
 }
 
 struct AddScreen_Previews: PreviewProvider {
     static var previews: some View {
-        AddScreen(myView: .constant(.add))
+        ForEach([
+            ColorScheme.light,
+            ColorScheme.dark
+        ], id :\.self) { scheme in
+            AddScreen()
+                .colorScheme(scheme)
+            //               .previewLayout(.sizeThatFits)
+            //                .previewDevice("iPhone SE")
+            //                .previewDevice("iPhone 11")
+            //                .previewDevice("iPhone 12")
+            //                .previewDevice("iPhone 13")
+            //                .previewDevice("iPhone 13 Pro Max")
+            //                .previewLayout(.fixed(width: 500, height: 800))
+        }
     }
 }

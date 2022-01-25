@@ -7,7 +7,6 @@
 import SwiftUI
 
 struct MainView: View {
-    
     @State var subView: SubViews = .eat
     
     var body: some View {

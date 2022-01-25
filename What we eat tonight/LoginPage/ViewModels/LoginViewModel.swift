@@ -15,7 +15,11 @@ class LoginViewModel : ObservableObject {
     @Published var showProgressView = false
     @Published var error: Authentication.AuthenticationError?
     @Published var ifAuth = false
-
+    
+    init(_ email: String = ""){
+        credentials.email = email
+    }
+    
     var loginDisabled: Bool {
         credentials.email.isEmpty || credentials.password.isEmpty
     }
@@ -37,10 +41,12 @@ class LoginViewModel : ObservableObject {
     }
     
     func autoLogin(){
-        guard Auth.auth().currentUser != nil else{
-           return
-        }
-        self.ifAuth = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+            guard Auth.auth().currentUser != nil else{
+                return
+            }
+            self.ifAuth = true
+        })
     }
     
     func register(email: String, password: String, completion: @escaping (Bool) -> Void){
@@ -63,9 +69,16 @@ class LoginViewModel : ObservableObject {
     
     func logOut(){
         showProgressView = true
-        AuthenticationService.shared.logOut()
-        showProgressView = false
-        self.ifAuth = false
-        self.credentials.password = ""
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            AuthenticationService.shared.logOut()
+            self.ifAuth = false
+            self.credentials.password = ""
+            self.showProgressView = false
+        }
     }
+    
+    deinit{
+        print("MaterialViewModel is destoryed")
+    }
+    
 }

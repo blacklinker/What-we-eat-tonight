@@ -14,7 +14,7 @@ struct MaterialsView: View {
         VStack{
             switch materialVM.state{
             case .success:
-                ForEach(materialVM.materialList! , id: \.id){ material in
+                ForEach(materialVM.materialList, id: \.id){ material in
                     Text(material.name)
                 }
             case .loading:

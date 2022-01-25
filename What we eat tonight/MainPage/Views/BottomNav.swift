@@ -33,7 +33,7 @@ struct BottomNav: View {
             }
             Button(action: { myView = .settings }){
                 VStack(alignment: .center, spacing: 10){
-                    Image(systemName: "person.crop.circle")
+                    Image(systemName: "gearshape")
                     Text("Account")
                 }.foregroundColor(.blue)
             }

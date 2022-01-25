@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct LoginScreen: View {
-    
     @EnvironmentObject var loginVM: LoginViewModel
     
     @State var ifRegister = false

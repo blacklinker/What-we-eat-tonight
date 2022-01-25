@@ -48,6 +48,7 @@ struct AddNewToolbar: View {
         .sheet(isPresented: $isImagePickerDisplay) {
             ImagePicker(sourceType: self.sourceType, selectedImage: self.$selectedImage, ifAdd: $ifAdd)
         }
+        
     }
 }
 

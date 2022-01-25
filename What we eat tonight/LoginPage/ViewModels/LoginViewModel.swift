@@ -16,6 +16,10 @@ class LoginViewModel : ObservableObject {
     @Published var error: Authentication.AuthenticationError?
     @Published var ifAuth = false
     
+    init(_ email: String = ""){
+        credentials.email = email
+    }
+    
     var loginDisabled: Bool {
         credentials.email.isEmpty || credentials.password.isEmpty
     }

@@ -10,7 +10,12 @@ import nanopb
 
 struct MainScreen: View {
     @Binding var myView: MyViews
-    @StateObject var loginVM = LoginViewModel()
+    @StateObject var loginVM : LoginViewModel
+    
+    init(_ useremail: String, _ myView: Binding<MyViews>){
+        self._loginVM = StateObject(wrappedValue: LoginViewModel(useremail))
+        self._myView = myView
+    }
     
     var body: some View {
         if !loginVM.ifAuth{
@@ -37,6 +42,6 @@ struct MainScreen: View {
 
 struct MainScreen_Previews: PreviewProvider {
     static var previews: some View {
-        MainScreen(myView: .constant(.main))
+        MainScreen( "", .constant(.main))
     }
 }

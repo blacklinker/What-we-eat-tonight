@@ -49,6 +49,19 @@ struct MaterialView: View {
 
 struct MaterialView_Previews: PreviewProvider {
     static var previews: some View {
-        MaterialView()
+        ForEach([
+            ColorScheme.light,
+            ColorScheme.dark
+        ], id :\.self) { scheme in
+            MaterialView()
+                .colorScheme(scheme)
+            //               .previewLayout(.sizeThatFits)
+            //                .previewDevice("iPhone SE")
+            //                .previewDevice("iPhone 11")
+            //                .previewDevice("iPhone 12")
+            //                .previewDevice("iPhone 13")
+            //                .previewDevice("iPhone 13 Pro Max")
+            //                .previewLayout(.fixed(width: 500, height: 800))
+        }
     }
 }

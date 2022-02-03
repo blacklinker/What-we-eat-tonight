@@ -6,8 +6,14 @@
 //
 
 import Foundation
+import FirebaseFirestoreSwift
 
 struct Material: Codable, Identifiable {
-    public let id: String
-    let name: String
+    @DocumentID var id: String?
+    var name: String
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+    }
 }

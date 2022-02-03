@@ -20,7 +20,7 @@ struct MaterialView: View {
                         Text(material.name).swipeActions(edge: .trailing, allowsFullSwipe: true) {
                             Button(role: .destructive){
                                 Task{
-                                    await materialVM.deleteMaterial(id: material.id)
+                                    await materialVM.deleteMaterial(id: material.id ?? "")
                                 }
                             } label: {
                                 Image(systemName: "trash")

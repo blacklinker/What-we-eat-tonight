@@ -55,9 +55,8 @@ struct MyButtonStyle: ButtonStyle{
             .frame(height: 20)
             .padding(10)
             .foregroundColor(.white)
-            .background(buttonColor)
+            .background(configuration.isPressed ? buttonColor.opacity(1.2): buttonColor)
             .cornerRadius(15)
-            .disabled(!validated)
     }
     
     var buttonColor: Color {

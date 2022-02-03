@@ -42,6 +42,7 @@ struct AddBotMaterial: View {
                     .cornerRadius(15)
             }
         }.padding(10)
+            .padding(.bottom, UIScreen.main.bounds.width / 7)
     }
 }
 

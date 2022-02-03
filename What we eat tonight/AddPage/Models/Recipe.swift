@@ -6,10 +6,16 @@
 //
 
 import Foundation
+import FirebaseFirestoreSwift
 
 struct Recipe: Codable, Identifiable{
-    var id: String
+    @DocumentID var id: String?
     var name: String
     var imageUrl: String
-    var material: [Material]
+    var material: [RecipeMaterial]
+}
+
+struct RecipeMaterial: Codable, Identifiable{
+    var id: String
+    var name: String
 }

@@ -24,15 +24,15 @@ struct AddNewToolbar: View {
                     self.isImagePickerDisplay.toggle()
                     
                 }){
-                    Text("Take photo").frame(width: UIScreen.main.bounds.width, height: 40).background(.white)
-                }
+                    Text("Take photo").frame(width: UIScreen.main.bounds.width, height: 40)
+                }.background(.white)
                 Divider()
                 Button(action: {
                     self.sourceType = .photoLibrary
                     self.isImagePickerDisplay.toggle()
                 }){
-                    Text("Select from library").frame(width: UIScreen.main.bounds.width, height: 40).background(.white)
-                }
+                    Text("Select from library").frame(width: UIScreen.main.bounds.width, height: 40)
+                }.background(.white)
             }
             Divider()
             Button(action: {
@@ -40,8 +40,10 @@ struct AddNewToolbar: View {
                     ifAdd = false
                 }
             }){
-                Text("Cancel").frame(width: UIScreen.main.bounds.width, height: 60, alignment: .center).background(.white)
+                Text("Cancel").frame(width: UIScreen.main.bounds.width, height: 60, alignment: .center)
             }
+            .padding(.bottom, UIScreen.main.bounds.width / 3)
+            .background(.white)
         }
         .frame(width: UIScreen.main.bounds.width, alignment: .bottom)
         .edgesIgnoringSafeArea(.bottom)

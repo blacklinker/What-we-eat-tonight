@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct AddRecipeTop: View {
-    @State private var name = ""
     @EnvironmentObject var recipeVM: RecipeViewModel
     
+    @Binding var name: String
     let selectedImage: UIImage?
     @Binding var ifAdd: Bool
     @Binding var selected: [Material]
@@ -25,7 +25,9 @@ struct AddRecipeTop: View {
                 .cornerRadius(15)
             HStack(alignment: .bottom){
                 Button(action: {
-                    ifAdd.toggle()
+                    withAnimation{
+                        ifAdd.toggle()
+                    }
                 }){
                     ImageView(selectedImage: selectedImage)
                 }
@@ -36,7 +38,15 @@ struct AddRecipeTop: View {
                     }
                 }){
                     Text("Save")
-                }.buttonStyle(MyButtonStyle(validated: validated))
+                        .frame(height: 20)
+                        .padding(.leading, 18)
+                        .padding(.trailing, 18)
+                        .padding(.top, 7)
+                        .padding(.bottom, 7)
+                        .foregroundColor(.white)
+                        .background(.green)
+                        .cornerRadius(15)
+                }.font(.system(size: 15))
             }
         }
     }

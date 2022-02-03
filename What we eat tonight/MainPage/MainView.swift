@@ -10,9 +10,9 @@ struct MainView: View {
     @State var subView: SubViews = .eat
     
     var body: some View {
-        ScrollView(.vertical, showsIndicators: true){
-            switch subView{
-            case .recipe:RowView()
+        VStack{
+            switch subView {
+            case .recipe: MainRecipeView()
             case .eat : RowView()
             case .material : MaterialsView()
             }

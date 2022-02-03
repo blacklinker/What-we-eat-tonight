@@ -21,14 +21,16 @@ class FirestoreService{
                 return
             }
             
-            let materials = querySnapshot.documents.map { queryDocumentSnapshot -> Material in
-                let data = queryDocumentSnapshot.data()
-                let name = data["name"] as? String ?? ""
-                let id = queryDocumentSnapshot.documentID
-                
-                return Material(id: id, name: name)
+            let materials = querySnapshot.documents.map { queryDocumentSnapshot -> Material? in
+                do{
+                    let material = try queryDocumentSnapshot.data(as: Material.self)
+                    return material
+                } catch {
+                    completion(.failure(error))
+                    return nil
+                }
             }
-            completion(.success(materials))
+            completion(.success(materials.compactMap{ $0 }))
         })
     }
     
@@ -56,6 +58,27 @@ class FirestoreService{
     //END
     
     //Recipe Service API
+    func getRecipes(completion: @escaping (Result<[Recipe], Error>) -> Void){
+        let userID = Auth.auth().currentUser?.uid ?? ""
+        Firestore.firestore().collection("Users").document(userID).collection("Recipes").getDocuments(completion: { querySnapshot, err in
+            guard err == nil, let querySnapshot = querySnapshot else {
+                completion(.failure(err!))
+                return
+            }
+            let recipes = querySnapshot.documents.map { queryDocumentSnapshot -> Recipe? in
+                do {
+                    let recipe = try queryDocumentSnapshot.data(as: Recipe.self)
+                    return recipe
+                } catch {
+                    completion(.failure(error))
+                    return nil
+                }
+            }
+            
+            completion(.success(recipes.compactMap{ $0 }))
+        })
+    }
+    
     func addRecipe(name: String, image: UIImage, material: [Material], completion: @escaping (Result<Bool, Error>) -> Void){
         uploadImage(image: image) { [weak self] result in
             switch result{
@@ -80,6 +103,24 @@ class FirestoreService{
         }
     }
     
+    func deleteRecipe(docId: String, completion: @escaping (Result<Bool, Error>) -> Void){
+        let userID = Auth.auth().currentUser?.uid ?? ""
+        Firestore.firestore().collection("Users").document(userID).collection("Recipes").document(docId).delete(){ err in
+            if let err = err{
+                completion(.failure(err))
+            }else{
+                completion(.success(true))
+            }
+        }
+
+    }
+    
+    func deleteImage(imageUrl: String){
+        if !imageUrl.isEmpty{
+            Firebase.Storage.storage().reference(forURL: imageUrl).delete()
+        }
+    }
+    
     private func convertMaterialToDic(material: [Material]) -> [Any] {
         var materialDic = [Any]()
         for item in material {
@@ -93,9 +134,9 @@ class FirestoreService{
     
     private func uploadImage(image: UIImage, completion: @escaping (Result<URL, Error>) -> Void ){
         let userID = Auth.auth().currentUser?.uid ?? ""
-        let data = image.jpegData(compressionQuality: 0.5)
+        let data = image.jpegData(compressionQuality: 0.1)
         let storageRef = Firebase.Storage.storage().reference()
-        let imageRef = storageRef.child("\(userID)/\(DateFormatter().string(from: Date()))")
+        let imageRef = storageRef.child("\(userID)/\(Date()).jpg")
         
         imageRef.putData(data!, metadata: nil) { (metadata, error) in
             guard metadata != nil, error == nil else {

@@ -31,15 +31,7 @@ struct AddBotMaterial: View {
                     }
                 }){
                     Text("Add").font(.system(size: 15))
-                }.font(.system(size: 12))
-                    .frame(height: 20)
-                    .padding(.leading, 18)
-                    .padding(.trailing, 18)
-                    .padding(.top, 7)
-                    .padding(.bottom, 7)
-                    .foregroundColor(.white)
-                    .background(.green)
-                    .cornerRadius(15)
+                }.font(.system(size: 12)).modifier(TextModifier(.green))
             }
         }.padding(10)
             .padding(.bottom, UIScreen.main.bounds.width / 7)

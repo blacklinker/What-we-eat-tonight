@@ -40,6 +40,7 @@ class FirestoreService{
             .addDocument(data: ["name": name]) { err in
                 if let err = err {
                     completion(.failure(err))
+                    return
                 }
             }
         completion(.success(doc.documentID))
@@ -112,12 +113,55 @@ class FirestoreService{
                 completion(.success(true))
             }
         }
-
     }
     
     func deleteImage(imageUrl: String){
         if !imageUrl.isEmpty{
             Firebase.Storage.storage().reference(forURL: imageUrl).delete()
+        }
+    }
+    
+    func addToEatToday(docId: String, completion: @escaping (Result<String, Error>) -> Void){
+        let userID = Auth.auth().currentUser?.uid ?? ""
+        let doc = Firestore.firestore().collection("Users").document(userID).collection("EatTonight").addDocument(data: ["recipeId": docId]) { err in
+            if let err = err {
+                completion(.failure(err))
+                return
+            }
+        }
+        completion(.success(doc.documentID))
+    }
+    
+    func getEatToday(completion: @escaping (Result<[TodayRecipe], Error>) -> Void){
+        let userID = Auth.auth().currentUser?.uid ?? ""
+        Firestore.firestore().collection("Users").document(userID).collection("EatTonight").getDocuments (completion: { querySnapshot, err in
+            guard err == nil, let querySnapshot = querySnapshot else{
+                completion(.failure(err!))
+                return
+            }
+            
+            let recipeIds = querySnapshot.documents.map { queryDocumentSnapshot -> TodayRecipe? in
+                do {
+                    let recipeId = try queryDocumentSnapshot.data(as: TodayRecipe.self)
+                    return recipeId
+                } catch {
+                    completion(.failure(error))
+                    return nil
+                }
+            }
+
+            completion(.success(recipeIds.compactMap{ $0 }))
+        })
+    }
+    
+    func removeEatToday(docId: String, completion: @escaping (Result<Bool, Error>) -> Void){
+        let userID = Auth.auth().currentUser?.uid ?? ""
+        Firestore.firestore().collection("Users").document(userID).collection("EatTonight").document(docId).delete(){ err in
+            if let err = err{
+                completion(.failure(err))
+            }else{
+                completion(.success(true))
+            }
         }
     }
     
@@ -152,4 +196,6 @@ class FirestoreService{
             }
         }
     }
+    
+    //end Recipe API
 }

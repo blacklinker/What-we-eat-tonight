@@ -7,16 +7,18 @@
 import SwiftUI
 
 struct MainView: View {
-    @State var subView: SubViews = .eat
+    @State var subView: SubViews = .recipe
+    @StateObject var recipeVM: RecipeViewModel = RecipeViewModel()
     
     var body: some View {
         VStack{
             switch subView {
-            case .recipe: MainRecipeView()
-            case .eat : RowView()
-            case .material : MaterialsView()
+            case .recipe: MainRecipeView().environmentObject(recipeVM)
+            case .eat : EatMainView().environmentObject(recipeVM)
+            case .material : MaterialsView().environmentObject(recipeVM)
             }
-        }.toolbar {
+        }
+        .toolbar {
             ToolbarItem(placement: .navigation){
                 TopNav(subView: $subView)
             }

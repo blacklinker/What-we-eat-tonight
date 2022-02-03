@@ -8,15 +8,18 @@
 import SwiftUI
 
 struct MaterialsView: View {
-    @StateObject private var materialVM = MaterialViewModel()
+    @EnvironmentObject var recipeVM : RecipeViewModel
     
     var body: some View {
-        VStack{
-            switch materialVM.state{
+        NavigationView{
+            switch recipeVM.state{
             case .success:
-                ForEach(materialVM.materialList, id: \.id){ material in
-                    Text(material.name)
-                }
+                List{
+                    ForEach(recipeVM.todayRecipeMaterial, id: \.self){ material in
+                        Text(material)
+                    }
+                }.navigationBarTitle("Material Needed", displayMode: .inline)
+                .background(.white)
             case .loading:
                 ProgressView().padding()
             default:
@@ -24,7 +27,7 @@ struct MaterialsView: View {
             }
         }
         .task{
-            await materialVM.getMaterials()
+            await recipeVM.getTodayRecipeMaterial()
         }
     }
 }

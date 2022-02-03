@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MainRecipeView: View {
-    @StateObject var recipeVM: RecipeViewModel = RecipeViewModel()
+    @EnvironmentObject var recipeVM: RecipeViewModel
     
     var body: some View {
         VStack{
@@ -18,7 +18,7 @@ struct MainRecipeView: View {
             case .success:
                 List{
                     ForEach(recipeVM.recipesList){ recipe in
-                        RecipeRow(name: recipe.name, imageUrl: recipe.imageUrl).swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                        RecipeRow(recipeId: recipe.id, name: recipe.name, imageUrl: recipe.imageUrl).swipeActions(edge: .trailing, allowsFullSwipe: true) {
                             Button(role: .destructive){
                                 Task{
                                     await recipeVM.deleteRecipe(id: recipe.id ?? "")
@@ -27,14 +27,36 @@ struct MainRecipeView: View {
                             } label: {
                                 Image(systemName: "trash")
                             }
-                        }
+                        }.buttonStyle(.borderless)
                     }
                 }.background(.white)
+                    .environmentObject(recipeVM)
             default:
                 Text("Something went wrong")
             }
-        }.task {
+        }
+        .task {
             await recipeVM.getRecipes()
+            await recipeVM.getEatToday()
+        }
+    }
+}
+
+struct MainRecipeViewPreview: PreviewProvider{
+    static var previews: some View{
+        ForEach([
+            ColorScheme.light,
+            ColorScheme.dark
+        ], id :\.self) { scheme in
+            MainRecipeView().environmentObject(RecipeViewModel())
+                .colorScheme(scheme)
+            //               .previewLayout(.sizeThatFits)
+            //                .previewDevice("iPhone SE")
+            //                .previewDevice("iPhone 11")
+                            .previewDevice("iPhone 12")
+            //                .previewDevice("iPhone 13")
+            //                .previewDevice("iPhone 13 Pro Max")
+            //                .previewLayout(.fixed(width: 500, height: 800))
         }
     }
 }

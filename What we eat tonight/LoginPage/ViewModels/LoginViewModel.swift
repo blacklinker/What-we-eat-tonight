@@ -12,22 +12,26 @@ import FirebaseAuth
 @MainActor
 class LoginViewModel : ObservableObject {
     @Published var credentials: Credentials = Credentials()
-    @Published var showProgressView = false
+    @Published var showProgressView = true
     @Published var error: Authentication.AuthenticationError?
     @Published var ifAuth = false
     
     init(_ email: String = ""){
         credentials.email = email
-    }
-    
-    var loginDisabled: Bool {
-        credentials.email.isEmpty || credentials.password.isEmpty
+        self.autoLogin()
     }
     
     func login(){
-        showProgressView = true
+        if credentials.email.isEmpty{
+            self.error = .emptyEmail
+            return
+        }
+        if credentials.password.isEmpty{
+            self.error = .emptyPassword
+            return
+        }
+        self.showProgressView = true
         AuthenticationService.shared.login(credentials: credentials){ [unowned self] (result: Result<Bool, Authentication.AuthenticationError>) in
-            showProgressView = false
             switch result{
             case .success:
                 ifAuth = true
@@ -37,15 +41,18 @@ class LoginViewModel : ObservableObject {
                     error = err
                 }
             }
+            self.showProgressView = false
         }
     }
     
     func autoLogin(){
         DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
             guard Auth.auth().currentUser != nil else{
+                self.showProgressView = false
                 return
             }
             self.ifAuth = true
+            self.showProgressView = false
         })
     }
     

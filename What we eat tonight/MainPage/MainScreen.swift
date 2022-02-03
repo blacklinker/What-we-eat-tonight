@@ -20,9 +20,9 @@ struct MainScreen: View {
     var body: some View {
         if !loginVM.ifAuth{
             LoginScreen().environmentObject(loginVM)
-                .onAppear{
-                    loginVM.autoLogin()
-                }
+//                .onAppear{
+//                    loginVM.autoLogin()
+//                }
         } else{
             NavigationView{
                 VStack{
@@ -32,7 +32,6 @@ struct MainScreen: View {
                     case .settings: SettingScreen()
                             .modifier(AppendNavBar(myView: $myView))
                             .environmentObject(loginVM)
-                    case .search: MainView().modifier(AppendNavBar(myView: $myView))
                     }
                 }
             }

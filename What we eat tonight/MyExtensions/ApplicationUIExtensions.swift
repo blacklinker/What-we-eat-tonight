@@ -71,3 +71,21 @@ extension String {
         return size.width
     }
 }
+
+struct TextModifier: ViewModifier{
+    var backgroundColor: Color
+    init(_ backgroundColor: Color){
+        self.backgroundColor = backgroundColor
+    }
+    func body(content: Content) -> some View {
+        content
+            .frame(width: 64, height: 20)
+            .padding(.leading, 13)
+            .padding(.trailing, 13)
+            .padding(.top, 7)
+            .padding(.bottom, 7)
+            .foregroundColor(.white)
+            .background(backgroundColor)
+            .cornerRadius(15)
+    }
+}

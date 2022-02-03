@@ -25,17 +25,11 @@ struct BottomNav: View {
                     Text("Add")
                 }.foregroundColor(myView == .add ? .black : .white)
             }
-            Button(action: { myView = .search }){
-                VStack(alignment: .center, spacing: 10){
-                    Image(systemName: "magnifyingglass")
-                    Text("Search")
-                }.foregroundColor(myView == .search ? .black : .white)
-            }
             Button(action: { myView = .settings }){
                 VStack(alignment: .center, spacing: 10){
                     Image(systemName: "gearshape")
                     Text("Settings")
-                }.foregroundColor(myView == .search ? .black : .white)
+                }.foregroundColor(myView == .settings ? .black : .white)
             }
         }
         .frame(width: UIScreen.main.bounds.width)

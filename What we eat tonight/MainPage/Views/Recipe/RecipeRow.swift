@@ -8,10 +8,13 @@
 import SwiftUI
 
 struct RecipeRow: View {
+    @EnvironmentObject var recipeVM: RecipeViewModel
+    let recipeId: String
     let name: String
     let imageUrl : String
     
-    init(name: String = "Can't find recipe", imageUrl: String = "wrong"){
+    init(recipeId: String? = "", name: String = "Can't find recipe", imageUrl: String = "wrong"){
+        self.recipeId = recipeId ?? ""
         self.name = name
         self.imageUrl = imageUrl
     }
@@ -35,25 +38,36 @@ struct RecipeRow: View {
                 }
             }.cornerRadius(20)
             .frame(width: 100, height: 100, alignment: .center).overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.gray))
-            Text(self.name)
+            Text(self.name).truncationMode(.tail)
             Spacer()
-            Button(action: {}){
-                Text("Eat Today")
-                    .frame(height: 20)
-                    .padding(.leading, 18)
-                    .padding(.trailing, 18)
-                    .padding(.top, 7)
-                    .padding(.bottom, 7)
-                    .foregroundColor(.white)
-                    .background(.green)
-                    .cornerRadius(15)
+            
+            if recipeVM.eatTodayRecipeIds.contains(where: { $0.recipeId == self.recipeId
+            }){
+                Button(action: {
+                    Task {
+                        await recipeVM.removeEatToday(recipeId: recipeId)
+                    }
+                }){
+                    Text("Added").modifier(TextModifier(.blue))
+                }
+            }else{
+                Button(action: {
+                    Task {
+                        await recipeVM.addToEatToday(recipeId: recipeId)
+                    }
+                }){
+                    Text("Eat Today").modifier(TextModifier(.green))
+                }
             }
-        }.padding()
+            
+ 
+        }.font(.system(size: 14))
+        .padding()
     }
 }
 
 struct RecipeRow_Previews: PreviewProvider {
     static var previews: some View {
-        RecipeRow()
+        RecipeRow().environmentObject(RecipeViewModel())
     }
 }

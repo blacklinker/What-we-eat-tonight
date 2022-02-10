@@ -8,12 +8,10 @@
 import SwiftUI
 
 struct AddRecipeTop: View {
-    @EnvironmentObject var recipeVM: RecipeViewModel
-    
+    @EnvironmentObject var addRecipeVM: AddRecipeViewModel
     @Binding var name: String
     let selectedImage: UIImage?
     @Binding var ifAdd: Bool
-    @Binding var selected: [Material]
     
     var body: some View {
         VStack{
@@ -34,18 +32,10 @@ struct AddRecipeTop: View {
                 Spacer()
                 Button(action: {
                     Task{
-                        await recipeVM.addRecipe(name: name, image: selectedImage!, material: selected)
+                        await addRecipeVM.addRecipe(name: name, image: selectedImage)
                     }
                 }){
-                    Text("Save")
-                        .frame(height: 20)
-                        .padding(.leading, 18)
-                        .padding(.trailing, 18)
-                        .padding(.top, 7)
-                        .padding(.bottom, 7)
-                        .foregroundColor(.white)
-                        .background(.green)
-                        .cornerRadius(15)
+                    Text("Save").modifier(TextModifier(.green))
                 }.font(.system(size: 15))
             }
         }

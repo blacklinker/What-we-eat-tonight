@@ -8,20 +8,16 @@
 import SwiftUI
 
 struct RecipeRow: View {
-    @EnvironmentObject var recipeVM: RecipeViewModel
-    let recipeId: String
-    let name: String
-    let imageUrl : String
+    @EnvironmentObject var mainRecipeVM: MainRecipeViewModel
+    let recipe: Recipe
     
-    init(recipeId: String? = "", name: String = "Can't find recipe", imageUrl: String = "wrong"){
-        self.recipeId = recipeId ?? ""
-        self.name = name
-        self.imageUrl = imageUrl
+    init(recipe: Recipe){
+        self.recipe = recipe
     }
     
     var body: some View {
         HStack(alignment: .center){
-            AsyncImage(url: URL(string: imageUrl),
+            AsyncImage(url: URL(string: recipe.imageUrl),
                        transaction: Transaction(animation: .easeInOut)
             ) { phase in
                 switch phase {
@@ -38,14 +34,14 @@ struct RecipeRow: View {
                 }
             }.cornerRadius(20)
             .frame(width: 100, height: 100, alignment: .center).overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.gray))
-            Text(self.name).truncationMode(.tail)
+            Text(recipe.name)
             Spacer()
             
-            if recipeVM.eatTodayRecipeIds.contains(where: { $0.recipeId == self.recipeId
+            if mainRecipeVM.eatTodayRecipeIds.contains(where: { $0.recipeId == recipe.id
             }){
                 Button(action: {
                     Task {
-                        await recipeVM.removeEatToday(recipeId: recipeId)
+                        await mainRecipeVM.removeEatToday(recipeId: recipe.id ?? "")
                     }
                 }){
                     Text("Added").modifier(TextModifier(.blue))
@@ -53,14 +49,12 @@ struct RecipeRow: View {
             }else{
                 Button(action: {
                     Task {
-                        await recipeVM.addToEatToday(recipeId: recipeId)
+                        await mainRecipeVM.addToEatToday(recipeId: recipe.id ?? "")
                     }
                 }){
                     Text("Eat Today").modifier(TextModifier(.green))
                 }
             }
-            
- 
         }.font(.system(size: 14))
         .padding()
     }
@@ -68,6 +62,6 @@ struct RecipeRow: View {
 
 struct RecipeRow_Previews: PreviewProvider {
     static var previews: some View {
-        RecipeRow().environmentObject(RecipeViewModel())
+        RecipeRow(recipe: Recipe(id: "", name: "", imageUrl: "", material: [])).environmentObject(MainRecipeViewModel())
     }
 }

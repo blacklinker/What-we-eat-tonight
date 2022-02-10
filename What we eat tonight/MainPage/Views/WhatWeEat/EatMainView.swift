@@ -8,31 +8,26 @@
 import SwiftUI
 
 struct EatMainView: View {
-    @EnvironmentObject var recipeVM: RecipeViewModel
- 
+    @EnvironmentObject var mainRecipeVM: MainRecipeViewModel
+    
     var body: some View {
-        VStack{
-            switch recipeVM.state{
-            case .loading:
-                ProgressView()
-            case .success:
+        GeometryReader{ bounds in
+            VStack{
                 List{
-                    ForEach(recipeVM.todayRecipes){ recipe in
-                        RowView(recipe: recipe)
-                            .buttonStyle(.borderless)
+                    ForEach(mainRecipeVM.todayRecipes){ recipe in
+                        RowView(recipe: recipe).swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                            Button(role: .destructive){
+                                Task{
+                                    await mainRecipeVM.removeEatToday(recipeId: recipe.id ?? "")
+                                }
+                            } label: {
+                                Image(systemName: "trash")
+                            }
+                        }
                     }
-                }.environmentObject(recipeVM)
-            default:
-                Text("Something went wrong")
+                }.environmentObject(mainRecipeVM)
             }
-        }.task {
-            await recipeVM.getTodayRecipe()
+            .frame(width: bounds.size.width, height: bounds.size.height, alignment: .center)
         }
-    }
-}
-
-struct EatMainView_Previews: PreviewProvider {
-    static var previews: some View {
-        EatMainView()
     }
 }

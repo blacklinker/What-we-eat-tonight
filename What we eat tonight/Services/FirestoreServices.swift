@@ -34,10 +34,13 @@ class FirestoreService{
         })
     }
     
-    func addMaterial(name: String, completion: @escaping (Result<String, Error>) -> Void){
+    func addMaterial(name: String, qty: Int, completion: @escaping (Result<String, Error>) -> Void){
         let userID = Auth.auth().currentUser?.uid ?? ""
         let doc = Firestore.firestore().collection("Users").document(userID).collection("Material")
-            .addDocument(data: ["name": name]) { err in
+            .addDocument(data: [
+                "name": name,
+                "qty": qty
+            ]) { err in
                 if let err = err {
                     completion(.failure(err))
                     return
@@ -54,6 +57,22 @@ class FirestoreService{
             }else{
                 completion(.success(true))
             }
+        }
+    }
+    
+    func editMaterial(_ material: Material, completion: @escaping (Result<Bool, Error>) -> Void){
+        let userID = Auth.auth().currentUser?.uid ?? ""
+        do{
+            try Firestore.firestore().collection("Users").document(userID).collection("Material").document(material.id ?? "").setData(from: material){ err in
+                guard let err = err else{
+                    completion(.success(true))
+                    return
+                }
+                completion(.failure(err))
+            }
+        }
+        catch{
+            completion(.failure(error))
         }
     }
     //END
@@ -80,7 +99,7 @@ class FirestoreService{
         })
     }
     
-    func addRecipe(name: String, image: UIImage, material: [Material], completion: @escaping (Result<Bool, Error>) -> Void){
+    func addRecipe(name: String, image: UIImage?, material: [Material], completion: @escaping (Result<Bool, Error>) -> Void){
         uploadImage(image: image) { [weak self] result in
             switch result{
             case .failure(let err):
@@ -140,17 +159,17 @@ class FirestoreService{
                 return
             }
             
-            let recipeIds = querySnapshot.documents.map { queryDocumentSnapshot -> TodayRecipe? in
+            let todayRecipes = querySnapshot.documents.map { queryDocumentSnapshot -> TodayRecipe? in
                 do {
-                    let recipeId = try queryDocumentSnapshot.data(as: TodayRecipe.self)
-                    return recipeId
+                    let todayRecipe = try queryDocumentSnapshot.data(as: TodayRecipe.self)
+                    return todayRecipe
                 } catch {
                     completion(.failure(error))
                     return nil
                 }
             }
 
-            completion(.success(recipeIds.compactMap{ $0 }))
+            completion(.success(todayRecipes.compactMap{ $0 }))
         })
     }
     
@@ -169,15 +188,20 @@ class FirestoreService{
         var materialDic = [Any]()
         for item in material {
             materialDic.append([
-                "id": item.id,
-                "name": item.name
+                "id": item.id ?? "",
+                "name": item.name,
+                "qty": item.qty
             ])
         }
         return materialDic
     }
     
-    private func uploadImage(image: UIImage, completion: @escaping (Result<URL, Error>) -> Void ){
+    private func uploadImage(image: UIImage?, completion: @escaping (Result<URL, Error>) -> Void ){
         let userID = Auth.auth().currentUser?.uid ?? ""
+        guard let image = image else {
+            completion(.success(URL(string: "empty")!))
+            return
+        }
         let data = image.jpegData(compressionQuality: 0.1)
         let storageRef = Firebase.Storage.storage().reference()
         let imageRef = storageRef.child("\(userID)/\(Date()).jpg")

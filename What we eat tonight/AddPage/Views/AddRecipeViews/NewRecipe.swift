@@ -8,43 +8,54 @@
 import SwiftUI
 
 struct NewRecipe: View {
-    @StateObject var recipeVM: RecipeViewModel = RecipeViewModel()
+    @StateObject var addRecipeVM: AddRecipeViewModel = AddRecipeViewModel()
     @State private var selectedImage: UIImage?
     @State var ifAdd: Bool = false
-    @State var selection = [Material]()
     @State var name = ""
     
     var body: some View {
         ZStack {
             VStack(alignment: .leading){
-                AddRecipeTop(name: $name, selectedImage: selectedImage, ifAdd: $ifAdd, selected: $selection).environmentObject(recipeVM)
+                AddRecipeTop(name: $name, selectedImage: selectedImage, ifAdd: $ifAdd).environmentObject(addRecipeVM)
                     .padding()
-                NavigationView{
-                    MaterialSelectionList(material: recipeVM.materialList, selected: $selection, rawContent: { material in
-                        HStack {
-                            Text(material.name)
-                            Spacer()
+                List{
+                    Section(header: Text("Material")) {
+                        ForEach(addRecipeVM.allMaterialList){ material in
+                            NavigationLink(destination:  AddRecipeMaterialView(material: material, qty: material.qty    ).environmentObject(addRecipeVM)) {
+                                HStack{
+                                    Text(material.name)
+                                    Spacer()
+                                    if material.qty > 0{
+                                        Text("\(material.qty)")
+                                        Image(systemName: "checkmark")
+                                            .resizable()
+                                            .frame(width: 20, height: 20)
+                                            .foregroundColor(.green)
+                                            .shadow(radius: 1)
+                                    }
+                                }
+                            }
                         }
-                    })
+                    }
                 }
             }
+            .font(.system(size: 14))
             .zIndex(1)
             .background(Color(.sRGB, red: 0.73, green: 0.73, blue: 0.73).opacity(0.5))
-            .disabled(recipeVM.state == .loading)
+            .disabled(addRecipeVM.state == .loading)
             
-            if recipeVM.state == .loading{
+            if addRecipeVM.state == .loading{
                 ProgressView().zIndex(3)
             }
-            if recipeVM.state == .saved{
+            if addRecipeVM.state == .saved{
                 Text("Saved!").foregroundColor(.green)
                     .zIndex(3)
                     .transition(.move(edge: .top))
                     .onAppear {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1){
                             withAnimation{
-                                recipeVM.state = .na
+                                addRecipeVM.state = .na
                                 self.selectedImage = nil
-                                self.selection = [Material]()
                                 self.name = ""
                             }
                         }
@@ -57,9 +68,6 @@ struct NewRecipe: View {
             }
         }
         .navigationTitle("Recipe")
-            .task {
-                await recipeVM.getMaterial()
-            }
     }
 }
 

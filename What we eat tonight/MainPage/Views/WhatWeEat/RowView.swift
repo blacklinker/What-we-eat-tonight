@@ -9,7 +9,6 @@ import SwiftUI
 import Firebase
 
 struct RowView: View {
-    @EnvironmentObject var recipeVM: RecipeViewModel
     let recipe: Recipe
     @State var showMaterial: Bool = false
     
@@ -40,30 +39,26 @@ struct RowView: View {
                         .frame(width: 100, height: 100, alignment: .center).overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.gray))
                     Text(recipe.name)
                     Spacer()
-                }.onTapGesture {
+                }
+                Button(action: {
                     withAnimation {
                         self.showMaterial.toggle()
                     }
-                }
-                Button(action: {
-                    Task {
-                        await recipeVM.removeEatToday(recipeId: recipe.id ?? "")
-                    }
                 }){
-                    Text("Remove")
-                        .modifier(TextModifier(.red))
+                    Text("Material").modifier(TextModifier(.green))
                 }
             }
             if showMaterial{
                 VStack(alignment: .leading){
                     ForEach(recipe.material){ material in
-                        Text(material.name)
+                        Text(material.name + " x " + String(material.qty))
                             .font(.system(size: 12))
                             .foregroundColor(.gray)
                     }
                 }
             }
-        }.padding()
+        }.font(.system(size: 14))
+        .padding()
     }
 }
 

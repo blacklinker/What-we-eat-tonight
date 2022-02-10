@@ -32,13 +32,13 @@ struct BottomNav: View {
                 }.foregroundColor(myView == .settings ? .black : .white)
             }
         }
+        .font(.system(size: 13))
         .frame(width: UIScreen.main.bounds.width)
         .background(Circle()
                         .fill(Color.blue)
                         .frame(width: UIScreen.main.bounds.width * 3, height: UIScreen.main.bounds.width * 3)
-                        .offset(y: (UIScreen.main.bounds.width) * 1.3)
+                        .offset(y: (UIScreen.main.bounds.width) * 1.35)
         )
-        .font(.system(size: 13))
     }
 }
 

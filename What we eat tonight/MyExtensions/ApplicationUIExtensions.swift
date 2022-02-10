@@ -89,3 +89,71 @@ struct TextModifier: ViewModifier{
             .cornerRadius(15)
     }
 }
+
+struct TextFieldModifier: ViewModifier{
+    func body(content: Content) -> some View {
+        content
+            .autocapitalization(.none)
+            .font(.system(size: 15))
+            .frame(height: 30)
+            .padding(.leading, 10)
+            .overlay(RoundedRectangle(cornerRadius: 20)
+                        .stroke(Color(.sRGB, red: 0.73, green: 0.73, blue: 0.73), lineWidth: 2)
+            )
+    }
+}
+
+struct swipeActionModifier: ViewModifier{
+    @Binding var activeView: SubViews
+    @Binding var viewState: CGSize
+    func body(content: Content) -> some View {
+        content
+            .gesture(
+            (self.activeView == SubViews.eat) ?
+            DragGesture().onChanged{ value in
+                self.viewState = value.translation
+            }.onEnded{ value in
+                if value.predictedEndTranslation.width > screenWidth / 2 {
+                    self.activeView = SubViews.recipe
+                    self.viewState = .zero
+                }else if value.predictedEndTranslation.width < -screenWidth / 2 {
+                    self.activeView = SubViews.material
+                    self.viewState = .zero
+                }else {
+                    self.viewState = .zero
+                }
+            }
+            :DragGesture().onChanged{ value in
+                switch self.activeView{
+                case .recipe:
+                    guard value.translation.width < 1 else { return }
+                    self.viewState = value.translation
+                case .material:
+                    guard value.translation.width > 1 else { return }
+                    self.viewState = value.translation
+                case .eat :
+                    self.viewState = value.translation
+                }
+            }.onEnded{ value in
+                switch self.activeView{
+                case .recipe:
+                    if value.translation.width < -screenWidth / 2 {
+                        self.activeView = .eat
+                        self.viewState = .zero
+                    } else {
+                        self.viewState = .zero
+                    }
+                case .material:
+                    if value.translation.width > screenWidth / 2 {
+                        self.activeView = .eat
+                        self.viewState = .zero
+                    } else {
+                        self.viewState = .zero
+                    }
+                case .eat :
+                    self.viewState = .zero
+                }
+            }
+        )
+    }
+}

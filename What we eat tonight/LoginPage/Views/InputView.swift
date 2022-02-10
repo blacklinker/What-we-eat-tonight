@@ -13,7 +13,7 @@ struct InputView: View {
     
     var body: some View {
         VStack{
-            TextField("Username" , text: $loginVM.credentials.email)
+            TextField("Username/Email" , text: $loginVM.credentials.email)
                 .disableAutocorrection(true)
                 .autocapitalization(.none)
                 .keyboardType(.emailAddress)

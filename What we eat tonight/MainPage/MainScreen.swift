@@ -11,6 +11,7 @@ import nanopb
 struct MainScreen: View {
     @Binding var myView: MyViews
     @StateObject var loginVM : LoginViewModel
+    @StateObject var mainRecipeVM: MainRecipeViewModel = MainRecipeViewModel()
     
     init(_ useremail: String, _ myView: Binding<MyViews>){
         self._loginVM = StateObject(wrappedValue: LoginViewModel(useremail))
@@ -20,14 +21,11 @@ struct MainScreen: View {
     var body: some View {
         if !loginVM.ifAuth{
             LoginScreen().environmentObject(loginVM)
-//                .onAppear{
-//                    loginVM.autoLogin()
-//                }
         } else{
             NavigationView{
                 VStack{
                     switch myView{
-                    case .main: MainView().modifier(AppendNavBar(myView: $myView))
+                    case .main: MainView().environmentObject(mainRecipeVM).modifier(AppendNavBar(myView: $myView))
                     case .add: AddScreen().modifier(AppendNavBar(myView: $myView))
                     case .settings: SettingScreen()
                             .modifier(AppendNavBar(myView: $myView))

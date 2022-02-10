@@ -6,22 +6,46 @@
 //
 import SwiftUI
 
+let screenSize = UIScreen.main.bounds
+let screenWidth = screenSize.width
+let screenHeight = screenSize.height
+
 struct MainView: View {
-    @State var subView: SubViews = .recipe
-    @StateObject var recipeVM: RecipeViewModel = RecipeViewModel()
+    @State var activeView: SubViews = .recipe
+    @State var viewState = CGSize.zero
+    @EnvironmentObject var mainRecipeVM: MainRecipeViewModel
     
     var body: some View {
-        VStack{
-            switch subView {
-            case .recipe: MainRecipeView().environmentObject(recipeVM)
-            case .eat : EatMainView().environmentObject(recipeVM)
-            case .material : MaterialsView().environmentObject(recipeVM)
+        switch mainRecipeVM.state{
+        case .failure:
+            Text("Something went wrong")
+        case .success:
+            ZStack{
+                EatMainView()
+                    .animation(.easeInOut, value: 1)
+                    .environmentObject(mainRecipeVM)
+                MainRecipeView()
+                    .offset(x: self.activeView == SubViews.recipe ? 0 : -screenWidth)
+                    .offset(x: activeView != .material ? viewState.width : 0)
+                    .animation(.easeInOut, value: 1)
+                    .environmentObject(mainRecipeVM)
+                MaterialsView()
+                    .offset(x: self.activeView == SubViews.material ? 0 : screenWidth)
+                    .offset(x: activeView != .recipe ? viewState.width : 0)
+                    .animation(.easeInOut, value: 1)
+                    .environmentObject(mainRecipeVM)
             }
-        }
-        .toolbar {
-            ToolbarItem(placement: .navigation){
-                TopNav(subView: $subView)
+            .modifier(swipeActionModifier(activeView: $activeView, viewState: $viewState))
+            .toolbar {
+                ToolbarItem(placement: .navigation){
+                    TopNav(subView: $activeView)
+                }
             }
+        default:
+            ProgressView()
+                .task {
+                    await mainRecipeVM.getAllData()
+                }
         }
     }
 }

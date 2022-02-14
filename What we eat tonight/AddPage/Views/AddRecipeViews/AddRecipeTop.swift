@@ -24,6 +24,7 @@ struct AddRecipeTop: View {
             HStack(alignment: .bottom){
                 Button(action: {
                     withAnimation{
+                        hideKeyboard()
                         ifAdd.toggle()
                     }
                 }){

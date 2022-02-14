@@ -8,32 +8,19 @@
 import SwiftUI
 
 struct MaterialsView: View {
-    @EnvironmentObject var recipeVM : RecipeViewModel
+    @EnvironmentObject var mainRecipeVM : MainRecipeViewModel
     
     var body: some View {
-        NavigationView{
-            switch recipeVM.state{
-            case .success:
+        GeometryReader{ bounds in
+            NavigationView{
                 List{
-                    ForEach(recipeVM.todayRecipeMaterial, id: \.self){ material in
-                        Text(material)
+                    ForEach(mainRecipeVM.mainRecipeMaterial, id: \.id){ material in
+                        MaterialRowView(material: material)
                     }
                 }.navigationBarTitle("Material Needed", displayMode: .inline)
-                .background(.white)
-            case .loading:
-                ProgressView().padding()
-            default:
-                Text("Something went wrong.")
+                    .background(.white)
             }
+            .frame(width: bounds.size.width, height: bounds.size.height, alignment: .center)
         }
-        .task{
-            await recipeVM.getTodayRecipeMaterial()
-        }
-    }
-}
-
-struct MaterialsView_Previews: PreviewProvider {
-    static var previews: some View {
-        MaterialsView()
     }
 }

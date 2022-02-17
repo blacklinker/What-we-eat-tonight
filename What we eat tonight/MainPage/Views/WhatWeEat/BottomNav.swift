@@ -19,12 +19,6 @@ struct BottomNav: View {
                     Text("Main")
                 }.foregroundColor(myView == .main ? .black : .white)
             }
-            Button(action: { myView = .add }){
-                VStack(alignment: .center, spacing: 10){
-                    Image(systemName: "plus.app")
-                    Text("Add")
-                }.foregroundColor(myView == .add ? .black : .white)
-            }
             Button(action: { myView = .settings }){
                 VStack(alignment: .center, spacing: 10){
                     Image(systemName: "gearshape")

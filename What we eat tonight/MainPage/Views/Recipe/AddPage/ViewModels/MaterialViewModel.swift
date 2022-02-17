@@ -62,7 +62,7 @@ class MaterialViewModel : ObservableObject{
                     self.state = .failure(error: err)
                 case .success(let docID):
                     withAnimation{
-                        self.materialList.append(Material(id: docID, name: name, qty: qty))
+                        self.materialList.insert(Material(id: docID, name: name, qty: qty), at: 0)
                     }
                     self.state = .success
                 }

@@ -9,7 +9,6 @@ import Foundation
 
 enum MyViews{
     case main
-    case add
     case settings
 }
 

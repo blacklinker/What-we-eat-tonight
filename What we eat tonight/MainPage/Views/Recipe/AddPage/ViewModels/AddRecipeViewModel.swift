@@ -35,34 +35,51 @@ class AddRecipeViewModel: ObservableObject{
     
     @Published var state: State = .na
     @Published var allMaterialList: [Material] = [Material]()
-    
-    init(){
+    @Published var recipe: Recipe
+    @Published var image: UIImage?
+
+    init(_ recipe: Recipe = Recipe(id: "", name: "", imageUrl: "", material: [])){
+        self.recipe = recipe
         self.getAllMaterial()
     }
     
     
-    func addRecipe(name: String, image: UIImage?) async {
+    func addOrUpdateRecipe() async {
         self.state = .loading
-        if name.isEmpty{
+        if self.recipe.name.isEmpty{
             self.state = .failure(error: Recipe.RecipeError.emptyName)
             return
         }
         DispatchQueue.main.async{
             let material = self.allMaterialList.filter{ $0.qty > 0 }
-            FirestoreService.shared.addRecipe(name: name, image: image, material: material) { [unowned self] result in
-                switch result{
-                case .failure(let err):
-                    self.state = .failure(error: err)
-                case .success:
-                    withAnimation{
-                        self.state = .saved
-                        self.initilzeMaterialList()
+            if self.recipe.id!.isEmpty {
+                FirestoreService.shared.addRecipe(name: self.recipe.name, image: self.image, material: material) { [unowned self] result in
+                    switch result{
+                    case .failure(let err):
+                        self.state = .failure(error: err)
+                    case .success:
+                        withAnimation{
+                            self.state = .saved
+                            self.initilzeMaterialList()
+                        }
+                    }
+                }
+            } else {
+                FirestoreService.shared.updateRecipe(recipe: self.recipe, image: self.image) { [unowned self] result in
+                    switch result{
+                    case .failure(let err):
+                        self.state = .failure(error: err)
+                    case .success:
+                        withAnimation{
+                            self.state = .saved
+                            self.initilzeMaterialList()
+                        }
                     }
                 }
             }
         }
     }
-
+    
     func getAllMaterial() {
         self.state = .loading
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
@@ -71,6 +88,7 @@ class AddRecipeViewModel: ObservableObject{
                 case .failure(let err):
                     self.state = .failure(error: err)
                 case .success(let data):
+                    self.allMaterialList = [Material]()
                     withAnimation{
                         for material in data {
                             self.allMaterialList.append(Material(id: material.id, name: material.name, qty: 0))

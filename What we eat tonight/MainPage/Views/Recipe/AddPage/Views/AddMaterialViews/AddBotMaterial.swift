@@ -36,8 +36,9 @@ struct AddBotMaterial: View {
                     Text("Add").font(.system(size: 15))
                 }.font(.system(size: 12)).modifier(TextModifier(.green))
             }
-        }.padding(10)
-            .padding(.bottom, UIScreen.main.bounds.width / 10)
+        }.font(.system(size: 12))
+        .padding(10)
+        .padding(.bottom, UIScreen.main.bounds.width / 10)
     }
 }
 

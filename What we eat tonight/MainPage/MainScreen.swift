@@ -26,7 +26,6 @@ struct MainScreen: View {
                 VStack{
                     switch myView{
                     case .main: MainView().environmentObject(mainRecipeVM).modifier(AppendNavBar(myView: $myView))
-                    case .add: AddScreen().modifier(AppendNavBar(myView: $myView))
                     case .settings: SettingScreen()
                             .modifier(AppendNavBar(myView: $myView))
                             .environmentObject(loginVM)

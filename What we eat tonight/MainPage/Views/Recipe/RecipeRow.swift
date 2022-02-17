@@ -32,8 +32,8 @@ struct RecipeRow: View {
                 @unknown default:
                     EmptyView()
                 }
-            }.cornerRadius(20)
-            .frame(width: 100, height: 100, alignment: .center).overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.gray))
+            }.cornerRadius(10)
+            .frame(width: 70, height: 70, alignment: .center).overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.gray))
             Text(recipe.name)
             Spacer()
             
@@ -56,7 +56,8 @@ struct RecipeRow: View {
                 }
             }
         }.font(.system(size: 14))
-        .padding()
+            .padding(.leading)
+            .padding(.trailing)
     }
 }
 

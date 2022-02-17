@@ -12,10 +12,10 @@ import UIKit
 
 class FirestoreService{
     static let shared = FirestoreService()
+    private static let userID = Auth.auth().currentUser?.uid ?? ""
     //Material Service API
     func getMaterials(completion: @escaping (Result<[Material], Error>) -> Void){
-        let userID = Auth.auth().currentUser?.uid ?? ""
-        Firestore.firestore().collection("Users").document(userID).collection("Material").getDocuments(completion: { querySnapshot, err in
+        Firestore.firestore().collection("Users").document(FirestoreService.userID).collection("Material").getDocuments(completion: { querySnapshot, err in
             guard err == nil, let querySnapshot = querySnapshot else {
                 completion(.failure(err!))
                 return
@@ -35,8 +35,7 @@ class FirestoreService{
     }
     
     func addMaterial(name: String, qty: Int, completion: @escaping (Result<String, Error>) -> Void){
-        let userID = Auth.auth().currentUser?.uid ?? ""
-        let doc = Firestore.firestore().collection("Users").document(userID).collection("Material")
+        let doc = Firestore.firestore().collection("Users").document(FirestoreService.userID).collection("Material")
             .addDocument(data: [
                 "name": name,
                 "qty": qty
@@ -50,8 +49,7 @@ class FirestoreService{
     }
     
     func deleteMaterial(docId: String, completion: @escaping (Result<Bool, Error>) -> Void){
-        let userID = Auth.auth().currentUser?.uid ?? ""
-        Firestore.firestore().collection("Users").document(userID).collection("Material").document(docId).delete(){ err in
+        Firestore.firestore().collection("Users").document(FirestoreService.userID).collection("Material").document(docId).delete(){ err in
             if let err = err{
                 completion(.failure(err))
             }else{
@@ -61,9 +59,8 @@ class FirestoreService{
     }
     
     func editMaterial(_ material: Material, completion: @escaping (Result<Bool, Error>) -> Void){
-        let userID = Auth.auth().currentUser?.uid ?? ""
         do{
-            try Firestore.firestore().collection("Users").document(userID).collection("Material").document(material.id ?? "").setData(from: material){ err in
+            try Firestore.firestore().collection("Users").document(FirestoreService.userID).collection("Material").document(material.id ?? "").setData(from: material){ err in
                 guard let err = err else{
                     completion(.success(true))
                     return
@@ -79,8 +76,7 @@ class FirestoreService{
     
     //Recipe Service API
     func getRecipes(completion: @escaping (Result<[Recipe], Error>) -> Void){
-        let userID = Auth.auth().currentUser?.uid ?? ""
-        Firestore.firestore().collection("Users").document(userID).collection("Recipes").getDocuments(completion: { querySnapshot, err in
+        Firestore.firestore().collection("Users").document(FirestoreService.userID).collection("Recipes").getDocuments(completion: { querySnapshot, err in
             guard err == nil, let querySnapshot = querySnapshot else {
                 completion(.failure(err!))
                 return
@@ -94,9 +90,51 @@ class FirestoreService{
                     return nil
                 }
             }
-            
             completion(.success(recipes.compactMap{ $0 }))
         })
+    }
+    
+    func updateRecipe(recipe: Recipe, image: UIImage?, completion: @escaping (Result<Bool, Error>) -> Void) {
+        let documentRef = Firestore.firestore().collection("Users").document(FirestoreService.userID).collection("Recipes").document(recipe.id ?? "")
+        documentRef.getDocument { [unowned self] (document, error) in
+            if let document = document, document.exists {
+                do{
+                    let dataDescription = try document.data(as: Recipe.self)
+                    if image != nil{
+                        if !dataDescription!.imageUrl.isEmpty{
+                            deleteImage(imageUrl: dataDescription!.imageUrl)
+                        }
+                        uploadImage(image: image) { [weak self] result in
+                            switch result{
+                            case .failure(let err):
+                                completion(.failure(err))
+                            case .success(let url):
+                                let newRecipe: [String: Any] = [
+                                    "name": recipe.name,
+                                    "imageUrl": url.absoluteString,
+                                    "material": self?.convertMaterialToDic(material: recipe.material) ?? "",
+                                    "AddDate": Date()
+                                ]
+                                documentRef.setData(newRecipe)
+                            }
+                        }
+                    } else {
+                        let newRecipe: [String: Any] = [
+                            "name": recipe.name,
+                            "imageUrl": recipe.imageUrl,
+                            "material": self.convertMaterialToDic(material: recipe.material),
+                            "AddDate": Date()
+                        ]
+                        documentRef.setData(newRecipe)
+                    }
+                } catch {
+                    completion(.failure(error))
+                }
+            } else {
+                completion(.failure(error!))
+                return
+            }
+        }
     }
     
     func addRecipe(name: String, image: UIImage?, material: [Material], completion: @escaping (Result<Bool, Error>) -> Void){
@@ -111,8 +149,7 @@ class FirestoreService{
                     "material": self?.convertMaterialToDic(material: material) ?? "",
                     "AddDate": Date()
                 ]
-                let userID = Auth.auth().currentUser?.uid ?? ""
-                Firestore.firestore().collection("Users").document(userID).collection("Recipes").addDocument(data: newRecipe) { err in
+                Firestore.firestore().collection("Users").document(FirestoreService.userID).collection("Recipes").addDocument(data: newRecipe) { err in
                     if let err = err {
                         completion(.failure(err))
                     }else{
@@ -124,8 +161,7 @@ class FirestoreService{
     }
     
     func deleteRecipe(docId: String, completion: @escaping (Result<Bool, Error>) -> Void){
-        let userID = Auth.auth().currentUser?.uid ?? ""
-        Firestore.firestore().collection("Users").document(userID).collection("Recipes").document(docId).delete(){ err in
+        Firestore.firestore().collection("Users").document(FirestoreService.userID).collection("Recipes").document(docId).delete(){ err in
             if let err = err{
                 completion(.failure(err))
             }else{
@@ -141,8 +177,7 @@ class FirestoreService{
     }
     
     func addToEatToday(docId: String, completion: @escaping (Result<String, Error>) -> Void){
-        let userID = Auth.auth().currentUser?.uid ?? ""
-        let doc = Firestore.firestore().collection("Users").document(userID).collection("EatTonight").addDocument(data: ["recipeId": docId]) { err in
+        let doc = Firestore.firestore().collection("Users").document(FirestoreService.userID).collection("EatTonight").addDocument(data: ["recipeId": docId]) { err in
             if let err = err {
                 completion(.failure(err))
                 return
@@ -152,8 +187,7 @@ class FirestoreService{
     }
     
     func getEatToday(completion: @escaping (Result<[TodayRecipe], Error>) -> Void){
-        let userID = Auth.auth().currentUser?.uid ?? ""
-        Firestore.firestore().collection("Users").document(userID).collection("EatTonight").getDocuments (completion: { querySnapshot, err in
+        Firestore.firestore().collection("Users").document(FirestoreService.userID).collection("EatTonight").getDocuments (completion: { querySnapshot, err in
             guard err == nil, let querySnapshot = querySnapshot else{
                 completion(.failure(err!))
                 return
@@ -174,8 +208,7 @@ class FirestoreService{
     }
     
     func removeEatToday(docId: String, completion: @escaping (Result<Bool, Error>) -> Void){
-        let userID = Auth.auth().currentUser?.uid ?? ""
-        Firestore.firestore().collection("Users").document(userID).collection("EatTonight").document(docId).delete(){ err in
+        Firestore.firestore().collection("Users").document(FirestoreService.userID).collection("EatTonight").document(docId).delete(){ err in
             if let err = err{
                 completion(.failure(err))
             }else{
@@ -196,15 +229,26 @@ class FirestoreService{
         return materialDic
     }
     
+    private func convertMaterialToDic(material: [RecipeMaterial]) -> [Any] {
+        var materialDic = [Any]()
+        for item in material {
+            materialDic.append([
+                "id": item.id,
+                "name": item.name,
+                "qty": item.qty
+            ])
+        }
+        return materialDic
+    }
+    
     private func uploadImage(image: UIImage?, completion: @escaping (Result<URL, Error>) -> Void ){
-        let userID = Auth.auth().currentUser?.uid ?? ""
         guard let image = image else {
             completion(.success(URL(string: "empty")!))
             return
         }
-        let data = image.jpegData(compressionQuality: 0.1)
+        let data = image.jpegData(compressionQuality: 0.05)
         let storageRef = Firebase.Storage.storage().reference()
-        let imageRef = storageRef.child("\(userID)/\(Date()).jpg")
+        let imageRef = storageRef.child("\(FirestoreService.userID)/\(Date()).jpg")
         
         imageRef.putData(data!, metadata: nil) { (metadata, error) in
             guard metadata != nil, error == nil else {

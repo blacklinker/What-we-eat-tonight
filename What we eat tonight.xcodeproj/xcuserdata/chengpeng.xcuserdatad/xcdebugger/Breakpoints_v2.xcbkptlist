@@ -295,22 +295,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "5EB69E5B-5C6E-47D2-9B9E-D3F47D89B76C"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "What we eat tonight/AddPage/AddScreen.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "14"
-            endingLineNumber = "14"
-            landmarkName = "body"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "245563CB-6CB7-4CFA-9AAA-AAEDFF111188"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -443,8 +427,8 @@
             filePath = "What we eat tonight/Services/FirestoreServices.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
             landmarkName = "addMaterial(name:qty:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -635,8 +619,8 @@
             filePath = "What we eat tonight/Services/FirestoreServices.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
             landmarkName = "addMaterial(name:qty:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -708,22 +692,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "70C5A5A3-DF45-474B-B20A-473934F22744"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "What we eat tonight/AddPage/Views/AddRecipeViews/NewRecipe.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "19"
-            endingLineNumber = "19"
-            landmarkName = "body"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "DAE4E594-6613-4941-A5B1-A35C5209AB31"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -731,8 +699,8 @@
             filePath = "What we eat tonight/Services/FirestoreServices.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "16"
-            endingLineNumber = "16"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
             landmarkName = "getMaterials(completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -763,8 +731,8 @@
             filePath = "What we eat tonight/Services/FirestoreServices.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "215"
-            endingLineNumber = "215"
+            startingLineNumber = "259"
+            endingLineNumber = "259"
             landmarkName = "uploadImage(image:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -779,8 +747,8 @@
             filePath = "What we eat tonight/Services/FirestoreServices.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "219"
-            endingLineNumber = "219"
+            startingLineNumber = "263"
+            endingLineNumber = "263"
             landmarkName = "uploadImage(image:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -795,8 +763,8 @@
             filePath = "What we eat tonight/Services/FirestoreServices.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
+            startingLineNumber = "145"
+            endingLineNumber = "145"
             landmarkName = "addRecipe(name:image:material:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -811,8 +779,8 @@
             filePath = "What we eat tonight/Services/FirestoreServices.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
             landmarkName = "addRecipe(name:image:material:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -827,8 +795,8 @@
             filePath = "What we eat tonight/Services/FirestoreServices.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
             landmarkName = "addRecipe(name:image:material:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -843,8 +811,8 @@
             filePath = "What we eat tonight/Services/FirestoreServices.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "196"
-            endingLineNumber = "196"
+            startingLineNumber = "229"
+            endingLineNumber = "229"
             landmarkName = "convertMaterialToDic(material:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -859,8 +827,8 @@
             filePath = "What we eat tonight/Services/FirestoreServices.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "207"
-            endingLineNumber = "207"
+            startingLineNumber = "251"
+            endingLineNumber = "251"
             landmarkName = "uploadImage(image:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -875,8 +843,8 @@
             filePath = "What we eat tonight/Services/FirestoreServices.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
             landmarkName = "getRecipes(completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -885,6 +853,38 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "D51B60C6-BACB-4789-B676-C67955703F3A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "What we eat tonight/Services/FirestoreServices.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
+            landmarkName = "getRecipes(completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "32740978-7D58-4927-ABBB-C23C783949D3"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "What we eat tonight/Services/FirestoreServices.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
+            landmarkName = "getRecipes(completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B60D6021-9C5F-48CE-B8B2-A31F242C900E"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -900,7 +900,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "32740978-7D58-4927-ABBB-C23C783949D3"
+            uuid = "0F9D8D59-AD98-4EE6-91B2-81225E404FEF"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -909,38 +909,6 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "93"
             endingLineNumber = "93"
-            landmarkName = "getRecipes(completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "B60D6021-9C5F-48CE-B8B2-A31F242C900E"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "What we eat tonight/Services/FirestoreServices.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
-            landmarkName = "getRecipes(completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "0F9D8D59-AD98-4EE6-91B2-81225E404FEF"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "What we eat tonight/Services/FirestoreServices.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
             landmarkName = "getRecipes(completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -971,8 +939,8 @@
             filePath = "What we eat tonight/Services/FirestoreServices.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
             landmarkName = "getRecipes(completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -987,8 +955,8 @@
             filePath = "What we eat tonight/Services/FirestoreServices.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
             landmarkName = "getRecipes(completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1003,8 +971,8 @@
             filePath = "What we eat tonight/Services/FirestoreServices.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
+            startingLineNumber = "162"
+            endingLineNumber = "162"
             landmarkName = "FirestoreService"
             landmarkType = "3">
          </BreakpointContent>
@@ -1092,22 +1060,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "5FD9A0D9-1F11-432E-9892-C697459DEF47"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "What we eat tonight/Services/FirestoreServices.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
-            landmarkName = "editMaterial(_:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "7694EDA1-327E-4922-BA48-6D28824B7066"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -1131,8 +1083,8 @@
             filePath = "What we eat tonight/AddPage/ViewModels/AddRecipeViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
             landmarkName = "addMaterial(id:qty:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1147,8 +1099,8 @@
             filePath = "What we eat tonight/AddPage/ViewModels/AddRecipeViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
             landmarkName = "addMaterial(id:qty:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1195,8 +1147,8 @@
             filePath = "What we eat tonight/AddPage/ViewModels/AddRecipeViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
             landmarkName = "addMaterial(id:qty:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1211,8 +1163,8 @@
             filePath = "What we eat tonight/AddPage/ViewModels/AddRecipeViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
             landmarkName = "addMaterial(id:qty:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1227,8 +1179,8 @@
             filePath = "What we eat tonight/AddPage/ViewModels/AddRecipeViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
             landmarkName = "addMaterial(id:qty:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1243,8 +1195,8 @@
             filePath = "What we eat tonight/Services/FirestoreServices.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "165"
-            endingLineNumber = "165"
+            startingLineNumber = "199"
+            endingLineNumber = "199"
             landmarkName = "getEatToday(completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1374,6 +1326,86 @@
             startingLineNumber = "102"
             endingLineNumber = "102"
             landmarkName = "getRecipes()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "47BB21D3-E09B-42A0-A4FD-06F1A407AEBA"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "What we eat tonight/Services/FirestoreServices.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
+            landmarkName = "updateRecipe(recipe:image:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "23CD1C31-88E6-4694-AED5-2FE35C6B1005"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "What we eat tonight/MainPage/Views/Recipe/AddPage/ViewModels/AddRecipeViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "init(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0551DF5E-3930-4C90-A1CF-CF180D7B7904"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "What we eat tonight/MainPage/Views/Recipe/AddPage/Views/AddRecipeViews/ImageView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "14"
+            endingLineNumber = "14"
+            landmarkName = "init(selectedImage:imageUrl:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "80B28155-CBDF-4A13-8362-8F75EDADFDEB"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "What we eat tonight/MainPage/Views/Recipe/AddPage/Views/AddRecipeViews/AddRecipeTop.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "855E201E-374E-4A09-929D-AC30C7CEAF32"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "What we eat tonight/MainPage/Views/Recipe/AddPage/Views/AddRecipeViews/ImageView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "init(selectedImage:imageUrl:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

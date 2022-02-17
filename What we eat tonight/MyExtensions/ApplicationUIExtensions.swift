@@ -80,13 +80,13 @@ struct TextModifier: ViewModifier{
     func body(content: Content) -> some View {
         content
             .frame(width: 64, height: 20)
-            .padding(.leading, 13)
-            .padding(.trailing, 13)
-            .padding(.top, 7)
-            .padding(.bottom, 7)
+            .padding(.leading, 7)
+            .padding(.trailing, 7)
+            .padding(.top, 4)
+            .padding(.bottom, 4)
             .foregroundColor(.white)
             .background(backgroundColor)
-            .cornerRadius(15)
+            .cornerRadius(10)
     }
 }
 

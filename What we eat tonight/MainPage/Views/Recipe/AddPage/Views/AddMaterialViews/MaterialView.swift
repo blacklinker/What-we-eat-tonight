@@ -44,7 +44,7 @@ struct MaterialView: View {
             }
             .zIndex(1)
             .font(.system(size: 14))
-            .navigationTitle("Material")
+            .navigationTitle("Add New Material")
             .task {
                 await materialVM.getMaterials()
             }

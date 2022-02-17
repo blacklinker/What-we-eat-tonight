@@ -43,7 +43,7 @@ class MainRecipeViewModel: ObservableObject{
     
     func getAllData() async {
         self.state = .loading
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             self.getRecipes()
         }
     }
@@ -52,7 +52,7 @@ class MainRecipeViewModel: ObservableObject{
     func removeEatToday(recipeId: String) async{
         let todayRecipe = self.eatTodayRecipeIds.first{ $0.recipeId == recipeId }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5 ){
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1 ){
             FirestoreService.shared.removeEatToday(docId: todayRecipe?.id ?? ""){ [unowned self] result in
                 switch result{
                 case .failure(let err):
@@ -71,7 +71,7 @@ class MainRecipeViewModel: ObservableObject{
         FirestoreService.shared.deleteRecipe(docId: id){ [unowned self] result in
             switch result{
             case .success:
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1){
                     FirestoreService.shared.deleteImage(imageUrl: imageUrl)
                     withAnimation{
                         self.recipesList.removeAll(where: { $0.id == id })
@@ -97,8 +97,20 @@ class MainRecipeViewModel: ObservableObject{
         }
     }
     
+//    func getRecipeEditMaterial(id: String) -> Recipe?{
+//        FirestoreService.shared.getRecipeByID(docId: id) { result in
+//            switch result{
+//            case .failed:
+//                self.state = .failure(error: err)
+//                return nil
+//            case .success(let recipe):
+//                self.state = .success
+//                return recipe
+//            }
+//        }
+//    }
     
-    private func getRecipes() {
+    func getRecipes() {
         FirestoreService.shared.getRecipes { [unowned self] result in
             switch result{
             case . failure(let err):

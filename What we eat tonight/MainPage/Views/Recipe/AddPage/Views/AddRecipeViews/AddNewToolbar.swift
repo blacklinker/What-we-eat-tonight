@@ -42,7 +42,6 @@ struct AddNewToolbar: View {
             }){
                 Text("Cancel").frame(width: UIScreen.main.bounds.width, height: 60, alignment: .center)
             }
-            .padding(.bottom, UIScreen.main.bounds.width / 3.5)
             .background(.white)
         }
         .frame(width: UIScreen.main.bounds.width, alignment: .bottom)

@@ -9,13 +9,11 @@ import SwiftUI
 
 struct AddRecipeTop: View {
     @EnvironmentObject var addRecipeVM: AddRecipeViewModel
-    @Binding var name: String
-    let selectedImage: UIImage?
     @Binding var ifAdd: Bool
     
     var body: some View {
         VStack{
-            TextField("Name", text: $name)
+            TextField("Name", text: $addRecipeVM.recipe.name)
                 .font(.system(size: 15))
                 .frame(height: 30)
                 .padding(10)
@@ -28,12 +26,12 @@ struct AddRecipeTop: View {
                         ifAdd.toggle()
                     }
                 }){
-                    ImageView(selectedImage: selectedImage)
+                    ImageView(selectedImage: addRecipeVM.image, imageUrl: addRecipeVM.recipe.imageUrl)
                 }
                 Spacer()
                 Button(action: {
                     Task{
-                        await addRecipeVM.addRecipe(name: name, image: selectedImage)
+                        await addRecipeVM.addOrUpdateRecipe()
                     }
                 }){
                     Text("Save").modifier(TextModifier(.green))
@@ -41,11 +39,4 @@ struct AddRecipeTop: View {
             }
         }
     }
-    
-    
-    var validated: Bool {
-        !name.isEmpty &&
-        selectedImage != nil
-    }
-    
 }

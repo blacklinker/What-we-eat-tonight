@@ -103,6 +103,17 @@ struct TextFieldModifier: ViewModifier{
     }
 }
 
+struct LoginTextFieldModifier: ViewModifier{
+    func body(content: Content) -> some View {
+        content
+            .disableAutocorrection(true)
+            .autocapitalization(.none)
+            .padding()
+            .cornerRadius(5.0)
+            .padding(.bottom, 20)
+    }
+}
+
 struct swipeActionModifier: ViewModifier{
     @Binding var activeView: SubViews
     @Binding var viewState: CGSize

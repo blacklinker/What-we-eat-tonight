@@ -127,6 +127,7 @@ class FirestoreService{
                         ]
                         documentRef.setData(newRecipe)
                     }
+                    completion(.success(true))
                 } catch {
                     completion(.failure(error))
                 }

@@ -17,7 +17,7 @@ struct AddButtonView: View {
                 Button(action: {
                     self.toggleVar.toggle()
                 }){
-                    Image(systemName: "plus.circle")
+                    Image(systemName: "pencil.circle.fill")
                         .resizable()
                         .frame(width: 30, height: 30)
                         .foregroundColor(.blue)

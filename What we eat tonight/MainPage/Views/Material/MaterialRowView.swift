@@ -26,6 +26,7 @@ struct MaterialRowView: View {
                     Text("(")
                     Text("-" + String(material.qty)).foregroundColor(.red)
                     Text(")")
+                    Text("*").font(.system(size: 20)).foregroundColor(.red)
                 }
             }else{
                 Text(String(material.inStock)).foregroundColor(.green)

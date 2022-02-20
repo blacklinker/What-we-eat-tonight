@@ -50,7 +50,7 @@ class AddRecipeViewModel: ObservableObject{
             self.state = .failure(error: Recipe.RecipeError.emptyName)
             return
         }
-        DispatchQueue.main.async{
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
             let material = self.allMaterialList.filter{ $0.qty > 0 }
             if self.recipe.id!.isEmpty {
                 FirestoreService.shared.addRecipe(name: self.recipe.name, image: self.image, material: material) { [unowned self] result in
@@ -59,8 +59,8 @@ class AddRecipeViewModel: ObservableObject{
                         self.state = .failure(error: err)
                     case .success:
                         withAnimation{
-                            self.state = .saved
                             self.initilzeMaterialList()
+                            self.state = .saved
                         }
                     }
                 }
@@ -71,8 +71,8 @@ class AddRecipeViewModel: ObservableObject{
                         self.state = .failure(error: err)
                     case .success:
                         withAnimation{
-                            self.state = .saved
                             self.initilzeMaterialList()
+                            self.state = .saved
                         }
                     }
                 }
@@ -89,10 +89,11 @@ class AddRecipeViewModel: ObservableObject{
                     self.state = .failure(error: err)
                 case .success(let data):
                     self.allMaterialList = [Material]()
+                    for material in data {
+                        self.allMaterialList.append(Material(id: material.id, name: material.name, qty: 0))
+                    }
                     withAnimation{
-                        for material in data {
-                            self.allMaterialList.append(Material(id: material.id, name: material.name, qty: 0))
-                        }
+                        self.initilzeMaterialList()
                     }
                     self.state = .success
                 }
@@ -100,8 +101,8 @@ class AddRecipeViewModel: ObservableObject{
         }
     }
     
-    func addMaterial(id: String?, qty: String) async {
-        guard let id = id else{
+    func addMaterial(material: Material, qty: String) async {
+        guard let id = material.id else{
             return
         }
         if id.isEmpty || qty.isEmpty {
@@ -115,13 +116,26 @@ class AddRecipeViewModel: ObservableObject{
                 }
                 return
             }
-            self.allMaterialList[index].qty = Int(qty) ?? 0
+            let value = Int(qty) ?? 0
+            self.allMaterialList[index].qty = value
+            if value == 0{
+                self.recipe.material.removeAll(where: { $0.id == id })
+            }
+            else {
+                guard let mIndex = self.recipe.material.firstIndex(where: { $0.id == id }) else {
+                    self.recipe.material.append(RecipeMaterial( id: id, name: material.name, qty: value ))
+                    return
+                }
+                self.recipe.material[mIndex].qty = value
+            }
         }
     }
-    
+
     private func initilzeMaterialList(){
         for index in allMaterialList.indices {
-            allMaterialList[index].qty = 0
+            let qty = self.recipe.material.first{ $0.id == allMaterialList[index].id }?.qty ?? 0
+            allMaterialList[index].qty = qty
         }
+        self.allMaterialList = self.allMaterialList.sorted{ $0.qty > $1.qty }
     }
 }

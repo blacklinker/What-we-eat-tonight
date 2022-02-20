@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct UserImage: View {
+    
+    
     var body: some View {
         Image(systemName: "person.circle.fill")
             .resizable()
@@ -16,6 +18,9 @@ struct UserImage: View {
             .clipped()
             .cornerRadius(150)
             .padding(.bottom, 75)
+            .onTapGesture{
+                UIApplication.shared.endEditing()
+            }
     }
 }
 

@@ -23,27 +23,14 @@ struct RegisterView: View {
             Text("Register").font(.title)
             Section{
                 TextField("Email" , text: $username)
-                    .disableAutocorrection(true)
-                    .autocapitalization(.none)
+                    .modifier(LoginTextFieldModifier())
                     .keyboardType(.emailAddress)
-                    .padding()
-                    .background(Color.gray.brightness(0.4))
-                    .cornerRadius(5)
-                    .padding(.bottom, 20)
+                   
                 SecureField("password", text: $password)
-                    .disableAutocorrection(true)
-                    .autocapitalization(.none)
-                    .padding()
-                    .background(Color.gray.brightness(0.4))
-                    .cornerRadius(5)
-                    .padding(.bottom, 20)
+                    .modifier(LoginTextFieldModifier())
+                    
                 SecureField("confirm password", text: $confirmPassword)
-                    .disableAutocorrection(true)
-                    .autocapitalization(.none)
-                    .padding()
-                    .background(Color.gray.brightness(0.4))
-                    .cornerRadius(5)
-                    .padding(.bottom, 20)
+                    .modifier(LoginTextFieldModifier())
                 
                 if registerResult{
                     Text(loginVM.error?.errorDescription ?? "Succeeded")

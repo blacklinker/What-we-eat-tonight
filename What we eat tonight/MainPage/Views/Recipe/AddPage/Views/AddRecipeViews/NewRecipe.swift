@@ -8,15 +8,19 @@
 import SwiftUI
 
 struct NewRecipe: View {
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @StateObject var addRecipeVM: AddRecipeViewModel
     @State var ifAdd: Bool = false
     @State var addMaterial = false
+    let navigationTitle: String
     
     init(recipe: Recipe? = nil){
         if recipe != nil{
             self._addRecipeVM = StateObject(wrappedValue: AddRecipeViewModel(recipe!))
+            self.navigationTitle = "Edit Recipe"
         } else {
             self._addRecipeVM = StateObject(wrappedValue: AddRecipeViewModel())
+            self.navigationTitle = "Add Recipe"
         }
     }
     
@@ -25,11 +29,10 @@ struct NewRecipe: View {
             ZStack{
                 VStack(alignment: .leading){
                     AddRecipeTop(ifAdd: $ifAdd).environmentObject(addRecipeVM)
-                        .padding()
                     List{
                         Section(header: Text("Material")) {
                             ForEach(addRecipeVM.allMaterialList){ material in
-                                NavigationLink(destination: AddRecipeMaterialView(material: material, qty: material.qty    ).environmentObject(addRecipeVM)) {
+                                NavigationLink(destination: AddRecipeMaterialView(material: material).environmentObject(addRecipeVM)) {
                                     HStack{
                                         Text(material.name)
                                         Spacer()
@@ -46,7 +49,6 @@ struct NewRecipe: View {
             }
             .font(.system(size: 14))
             .zIndex(1)
-            .background(Color(.sRGB, red: 0.73, green: 0.73, blue: 0.73).opacity(0.5))
             .disabled(addRecipeVM.state == .loading)
             .sheet(isPresented: $addMaterial, onDismiss: { self.addRecipeVM.getAllMaterial() }){
                 NavigationView{
@@ -75,9 +77,8 @@ struct NewRecipe: View {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1){
                             withAnimation{
                                 addRecipeVM.state = .na
-                                addRecipeVM.image = nil
-                                addRecipeVM.recipe.name = ""
                             }
+                            self.presentationMode.wrappedValue.dismiss()
                         }
                     }
             }
@@ -86,7 +87,25 @@ struct NewRecipe: View {
                     .zIndex(2)
                     .transition(.move(edge: .bottom))
             }
+        }.navigationTitle(self.navigationTitle)
+    }
+}
+
+struct NewRecipe_Preview: PreviewProvider{
+    static var previews: some View{
+        ForEach([
+            ColorScheme.light,
+            ColorScheme.dark
+        ], id :\.self) { scheme in
+            NewRecipe().environmentObject(AddRecipeViewModel())
+                .colorScheme(scheme)
+            //               .previewLayout(.sizeThatFits)
+            //                .previewDevice("iPhone SE")
+            //                .previewDevice("iPhone 11")
+                            .previewDevice("iPhone 12")
+            //                .previewDevice("iPhone 13")
+            //                .previewDevice("iPhone 13 Pro Max")
+            //                .previewLayout(.fixed(width: 500, height: 800))
         }
-        .navigationTitle("Recipe")
     }
 }

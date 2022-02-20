@@ -50,10 +50,12 @@ class MainRecipeViewModel: ObservableObject{
     
     
     func removeEatToday(recipeId: String) async{
-        let todayRecipe = self.eatTodayRecipeIds.first{ $0.recipeId == recipeId }
+        guard let todayRecipe = self.eatTodayRecipeIds.first(where:{ $0.recipeId == recipeId }) else {
+            return
+        }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1 ){
-            FirestoreService.shared.removeEatToday(docId: todayRecipe?.id ?? ""){ [unowned self] result in
+            FirestoreService.shared.removeEatToday(docId: todayRecipe.id ?? ""){ [unowned self] result in
                 switch result{
                 case .failure(let err):
                     self.state = .failure(error: err)
@@ -66,23 +68,7 @@ class MainRecipeViewModel: ObservableObject{
             }
         }
     }
-    
-    func deleteRecipe(id: String, imageUrl: String) async {
-        FirestoreService.shared.deleteRecipe(docId: id){ [unowned self] result in
-            switch result{
-            case .success:
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1){
-                    FirestoreService.shared.deleteImage(imageUrl: imageUrl)
-                    withAnimation{
-                        self.recipesList.removeAll(where: { $0.id == id })
-                    }
-                }
-            case .failure(let err):
-                self.state = .failure(error: err)
-            }
-        }
-    }
-    
+
     func addToEatToday(recipeId: String) async{
         FirestoreService.shared.addToEatToday(docId: recipeId) { result in
             switch result{
@@ -97,18 +83,22 @@ class MainRecipeViewModel: ObservableObject{
         }
     }
     
-//    func getRecipeEditMaterial(id: String) -> Recipe?{
-//        FirestoreService.shared.getRecipeByID(docId: id) { result in
-//            switch result{
-//            case .failed:
-//                self.state = .failure(error: err)
-//                return nil
-//            case .success(let recipe):
-//                self.state = .success
-//                return recipe
-//            }
-//        }
-//    }
+    func deleteRecipe(id: String, imageUrl: String) async {
+        await self.removeEatToday(recipeId: id)
+        FirestoreService.shared.deleteRecipe(docId: id){ [unowned self] result in
+            switch result{
+            case .success:
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1){
+                    FirestoreService.shared.deleteImage(imageUrl: imageUrl)
+                    withAnimation{
+                        self.recipesList.removeAll(where: { $0.id == id })
+                    }
+                }
+            case .failure(let err):
+                self.state = .failure(error: err)
+            }
+        }
+    }
     
     func getRecipes() {
         FirestoreService.shared.getRecipes { [unowned self] result in

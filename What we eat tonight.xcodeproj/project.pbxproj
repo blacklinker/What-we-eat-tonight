@@ -19,7 +19,6 @@
 		6541375D278F79BC00C585D1 /* MaterialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6541375C278F79BC00C585D1 /* MaterialViewModel.swift */; };
 		6541375F278F7B6100C585D1 /* FirestoreServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6541375E278F7B6100C585D1 /* FirestoreServices.swift */; };
 		6541376127909D6600C585D1 /* MaterialsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6541376027909D6600C585D1 /* MaterialsView.swift */; };
-		6559FA9727BD9F0E005E772B /* RecipeEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6559FA9627BD9F0E005E772B /* RecipeEditView.swift */; };
 		6559FA9927BD9F51005E772B /* AddButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6559FA9827BD9F51005E772B /* AddButtonView.swift */; };
 		655D9B9D278748D300CA8F82 /* NewRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655D9B9C278748D300CA8F82 /* NewRecipe.swift */; };
 		655D9B9F27876E9C00CA8F82 /* MaterialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655D9B9E27876E9C00CA8F82 /* MaterialView.swift */; };
@@ -120,7 +119,6 @@
 		6541375C278F79BC00C585D1 /* MaterialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialViewModel.swift; sourceTree = "<group>"; };
 		6541375E278F7B6100C585D1 /* FirestoreServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreServices.swift; sourceTree = "<group>"; };
 		6541376027909D6600C585D1 /* MaterialsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialsView.swift; sourceTree = "<group>"; };
-		6559FA9627BD9F0E005E772B /* RecipeEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeEditView.swift; sourceTree = "<group>"; };
 		6559FA9827BD9F51005E772B /* AddButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButtonView.swift; sourceTree = "<group>"; };
 		655D9B9C278748D300CA8F82 /* NewRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRecipe.swift; sourceTree = "<group>"; };
 		655D9B9E27876E9C00CA8F82 /* MaterialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialView.swift; sourceTree = "<group>"; };
@@ -421,7 +419,6 @@
 				65628055278690EE006A3203 /* AddPage */,
 				6576A1D327A2003B00C3EAA4 /* MainRecipeView.swift */,
 				6599E84327A831F600E86FAA /* RecipeRow.swift */,
-				6559FA9627BD9F0E005E772B /* RecipeEditView.swift */,
 				6559FA9827BD9F51005E772B /* AddButtonView.swift */,
 			);
 			path = Recipe;
@@ -634,7 +631,6 @@
 				6576C3C227862C5E000B6127 /* WelcomeText.swift in Sources */,
 				65E8E42227B1BB7B000453CF /* AddRecipeViewModel.swift in Sources */,
 				65C48C822794EB39009F7EE0 /* AddBotMaterial.swift in Sources */,
-				6559FA9727BD9F0E005E772B /* RecipeEditView.swift in Sources */,
 				6599E84427A831F600E86FAA /* RecipeRow.swift in Sources */,
 				6530909C2784E98000E4432D /* ContentView.swift in Sources */,
 				65E7E02F2788AF88001BB882 /* Authentication.swift in Sources */,

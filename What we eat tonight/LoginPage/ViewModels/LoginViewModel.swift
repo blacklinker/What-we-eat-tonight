@@ -83,9 +83,4 @@ class LoginViewModel : ObservableObject {
             self.showProgressView = false
         }
     }
-    
-    deinit{
-        print("MaterialViewModel is destoryed")
-    }
-    
 }

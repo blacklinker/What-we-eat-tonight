@@ -16,9 +16,10 @@ struct AddRecipeTop: View {
             TextField("Name", text: $addRecipeVM.recipe.name)
                 .font(.system(size: 15))
                 .frame(height: 30)
-                .padding(10)
-                .background(.white)
-                .cornerRadius(15)
+                .padding(.leading, 10)
+                .overlay(RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color(.sRGB, red: 0.73, green: 0.73, blue: 0.73), lineWidth: 2))
+            
             HStack(alignment: .bottom){
                 Button(action: {
                     withAnimation{
@@ -37,6 +38,25 @@ struct AddRecipeTop: View {
                     Text("Save").modifier(TextModifier(.green))
                 }.font(.system(size: 15))
             }
+        }.padding()
+    }
+}
+
+struct AddRecipeTop_Preview: PreviewProvider{
+    static var previews: some View{
+        ForEach([
+            ColorScheme.light,
+            ColorScheme.dark
+        ], id :\.self) { scheme in
+            AddRecipeTop(ifAdd: .constant(false)).environmentObject(AddRecipeViewModel())
+                .colorScheme(scheme)
+            //               .previewLayout(.sizeThatFits)
+            //                .previewDevice("iPhone SE")
+            //                .previewDevice("iPhone 11")
+                .previewDevice("iPhone 12")
+            //                .previewDevice("iPhone 13")
+            //                .previewDevice("iPhone 13 Pro Max")
+            //                .previewLayout(.fixed(width: 500, height: 800))
         }
     }
 }

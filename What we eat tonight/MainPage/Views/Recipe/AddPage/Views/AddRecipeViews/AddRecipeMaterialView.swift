@@ -14,15 +14,15 @@ struct AddRecipeMaterialView: View {
     let material: Material
     @State var qty = "0"
     
-    init(material: Material, qty: Int){
+    init(material: Material){
         self.material = material
-        _qty = State(initialValue: String(qty))
+        _qty = State(initialValue: String(material.qty))
     }
     
     var body: some View {
             Form {
                 Section(header: Text("Name")) {
-                    Text(material.name).foregroundColor(.gray)
+                    Text(material.name)
                 }
                 Section(header: Text("Quantity will be used")) {
                     TextField("0", text: $qty).keyboardType(.numberPad)
@@ -37,15 +37,12 @@ struct AddRecipeMaterialView: View {
             .toolbar {
                 Button(action: {
                     Task {
-                        await addRecipeVM.addMaterial(id: material.id, qty: self.qty)
+                        await addRecipeVM.addMaterial(material: material, qty: self.qty)
                     }
                     self.presentationMode.wrappedValue.dismiss()
-                    
                 }){
                     Text("Done")
                 }
             }
-        
-
     }
 }

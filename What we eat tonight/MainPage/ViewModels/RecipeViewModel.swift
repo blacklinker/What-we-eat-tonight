@@ -48,7 +48,6 @@ class MainRecipeViewModel: ObservableObject{
         }
     }
     
-    
     func removeEatToday(recipeId: String) async{
         guard let todayRecipe = self.eatTodayRecipeIds.first(where:{ $0.recipeId == recipeId }) else {
             return
@@ -63,6 +62,7 @@ class MainRecipeViewModel: ObservableObject{
                     withAnimation{
                         self.eatTodayRecipeIds.removeAll(where: { $0.recipeId == recipeId })
                         self.todayRecipes.removeAll(where: { $0.id == recipeId })
+                        self.getMainRecipeMaterial()
                     }
                 }
             }
@@ -77,6 +77,7 @@ class MainRecipeViewModel: ObservableObject{
             case .success(let docId):
                 withAnimation{
                     self.eatTodayRecipeIds.append(TodayRecipe(id: docId, recipeId: recipeId ))
+                    self.getTodayRecipe()
                 }
                 self.state = .success
             }
@@ -134,7 +135,6 @@ class MainRecipeViewModel: ObservableObject{
     }
     
     private func getMaterial() {
-        self.state = .loading
         FirestoreService.shared.getMaterials { [unowned self] result in
             switch result{
             case .failure(let err):

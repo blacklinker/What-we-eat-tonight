@@ -50,6 +50,7 @@ struct RecipeRow: View {
                 Button(action: {
                     Task {
                         await mainRecipeVM.addToEatToday(recipeId: recipe.id ?? "")
+                        
                     }
                 }){
                     Text("Eat Today").modifier(TextModifier(.green))

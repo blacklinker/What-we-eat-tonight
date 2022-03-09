@@ -6,22 +6,49 @@
 //
 import SwiftUI
 
+let screenSize = UIScreen.main.bounds
+let screenWidth = screenSize.width
+let screenHeight = screenSize.height
+
 struct MainView: View {
-    
-    @State var subView: SubViews = .eat
+    @State var activeView: SubViews = .recipe
+    @State var viewState = CGSize.zero
+    @EnvironmentObject var mainRecipeVM: MainRecipeViewModel
     
     var body: some View {
-        ScrollView(.vertical, showsIndicators: true){
-            switch subView{
-            case .recipe:RowView()
-            case .eat : RowView()
-            case .material : MaterialsView()
+        VStack{
+            switch mainRecipeVM.state{
+            case .failure:
+                Text("Something went wrong")
+            case .success:
+                ZStack{
+                    EatMainView()
+                        .animation(.easeInOut, value: 1)
+                        .environmentObject(mainRecipeVM)
+                    MainRecipeView()
+                        .offset(x: self.activeView == SubViews.recipe ? 0 : -screenWidth)
+                        .offset(x: activeView != .material ? viewState.width : 0)
+                        .animation(.easeInOut, value: 1)
+                        .environmentObject(mainRecipeVM)
+                    MaterialsView()
+                        .offset(x: self.activeView == SubViews.material ? 0 : screenWidth)
+                        .offset(x: activeView != .recipe ? viewState.width : 0)
+                        .animation(.easeInOut, value: 1)
+                        .environmentObject(mainRecipeVM)
+                }
+                .modifier(swipeActionModifier(activeView: $activeView, viewState: $viewState))
+                .toolbar {
+                    ToolbarItem(placement: .navigation){
+                        TopNav(subView: $activeView)
+                    }
+                }
+            default:
+                ProgressView()
             }
-        }.toolbar {
-            ToolbarItem(placement: .navigation){
-                TopNav(subView: $subView)
-            }
+        } .task {
+            await mainRecipeVM.getAllData()
         }
+
     }
 }
 

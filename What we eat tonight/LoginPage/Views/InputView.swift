@@ -13,21 +13,11 @@ struct InputView: View {
     
     var body: some View {
         VStack{
-            TextField("Username" , text: $loginVM.credentials.email)
-                .disableAutocorrection(true)
-                .textInputAutocapitalization(.none)
+            TextField("Username/Email" , text: $loginVM.credentials.email)
+                .modifier(LoginTextFieldModifier())
                 .keyboardType(.emailAddress)
-                .padding()
-                .background(Color.gray.brightness(0.4))
-                .cornerRadius(5)
-                .padding(.bottom, 20)
             SecureField("Password", text: $loginVM.credentials.password)
-                .disableAutocorrection(true)
-                .textInputAutocapitalization(.none)
-                .padding()
-                .background(Color.gray.brightness(0.4))
-                .cornerRadius(5)
-                .padding(.bottom, 20)
+                .modifier(LoginTextFieldModifier())
         }
     }
     

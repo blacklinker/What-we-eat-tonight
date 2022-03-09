@@ -14,6 +14,8 @@ class Authentication: ObservableObject{
     enum AuthenticationError: Error, LocalizedError, Identifiable{
         case invalidCredentials
         case invalidUserCreation
+        case emptyEmail
+        case emptyPassword
         
         var id: String {
             self.localizedDescription
@@ -25,6 +27,10 @@ class Authentication: ObservableObject{
                 return NSLocalizedString("Either your email or password is incorrect. Please try again", comment: "")
             case .invalidUserCreation :
                 return NSLocalizedString("Can't create user, please try again", comment: "")
+            case .emptyEmail:
+                return NSLocalizedString("Email can't be empty", comment: "")
+            case .emptyPassword:
+                return NSLocalizedString("Password can't be empty", comment: "")
             }
             }
     }

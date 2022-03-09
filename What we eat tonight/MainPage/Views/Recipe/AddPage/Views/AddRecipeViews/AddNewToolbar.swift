@@ -24,15 +24,15 @@ struct AddNewToolbar: View {
                     self.isImagePickerDisplay.toggle()
                     
                 }){
-                    Text("拍摄").frame(width: UIScreen.main.bounds.width, height: 40).background(.white)
-                }
+                    Text("Take photo").frame(width: UIScreen.main.bounds.width, height: 40)
+                }.background(.white)
                 Divider()
                 Button(action: {
                     self.sourceType = .photoLibrary
                     self.isImagePickerDisplay.toggle()
                 }){
-                    Text("从手机相册选择").frame(width: UIScreen.main.bounds.width, height: 40).background(.white)
-                }
+                    Text("Select from library").frame(width: UIScreen.main.bounds.width, height: 40)
+                }.background(.white)
             }
             Divider()
             Button(action: {
@@ -40,14 +40,16 @@ struct AddNewToolbar: View {
                     ifAdd = false
                 }
             }){
-                Text("取消").frame(width: UIScreen.main.bounds.width, height: 60, alignment: .center).background(.white)
+                Text("Cancel").frame(width: UIScreen.main.bounds.width, height: 60, alignment: .center)
             }
+            .background(.white)
         }
         .frame(width: UIScreen.main.bounds.width, alignment: .bottom)
         .edgesIgnoringSafeArea(.bottom)
         .sheet(isPresented: $isImagePickerDisplay) {
             ImagePicker(sourceType: self.sourceType, selectedImage: self.$selectedImage, ifAdd: $ifAdd)
         }
+        
     }
 }
 

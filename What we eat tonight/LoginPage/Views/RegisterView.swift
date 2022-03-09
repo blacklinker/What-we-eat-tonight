@@ -20,33 +20,20 @@ struct RegisterView: View {
     
     var body: some View {
         VStack{
-            Text("注册").font(.title)
+            Text("Register").font(.title)
             Section{
-                TextField("用户名/邮箱" , text: $username)
-                    .disableAutocorrection(true)
-                    .textInputAutocapitalization(.none)
+                TextField("Email" , text: $username)
+                    .modifier(LoginTextFieldModifier())
                     .keyboardType(.emailAddress)
-                    .padding()
-                    .background(Color.gray.brightness(0.4))
-                    .cornerRadius(5)
-                    .padding(.bottom, 20)
-                SecureField("密码", text: $password)
-                    .disableAutocorrection(true)
-                    .textInputAutocapitalization(.none)
-                    .padding()
-                    .background(Color.gray.brightness(0.4))
-                    .cornerRadius(5)
-                    .padding(.bottom, 20)
-                SecureField("确认密码", text: $confirmPassword)
-                    .disableAutocorrection(true)
-                    .textInputAutocapitalization(.none)
-                    .padding()
-                    .background(Color.gray.brightness(0.4))
-                    .cornerRadius(5)
-                    .padding(.bottom, 20)
+                   
+                SecureField("password", text: $password)
+                    .modifier(LoginTextFieldModifier())
+                    
+                SecureField("confirm password", text: $confirmPassword)
+                    .modifier(LoginTextFieldModifier())
                 
                 if registerResult{
-                    Text(loginVM.error?.errorDescription ?? "注册成功")
+                    Text(loginVM.error?.errorDescription ?? "Succeeded")
                         .foregroundColor(.green)
                         .animation(.easeInOut, value: 4)
                         .onAppear{

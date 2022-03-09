@@ -7,34 +7,53 @@
 
 import Foundation
 import SwiftUI
+import FirebaseAuth
 
 @MainActor
 class LoginViewModel : ObservableObject {
     @Published var credentials: Credentials = Credentials()
-    @Published var showProgressView = false
+    @Published var showProgressView = true
     @Published var error: Authentication.AuthenticationError?
     @Published var ifAuth = false
-
-    var loginDisabled: Bool {
-        credentials.email.isEmpty || credentials.password.isEmpty
+    
+    init(_ email: String = ""){
+        credentials.email = email
+        self.autoLogin()
     }
     
-    func login(completion: @escaping (Bool) -> Void){
-        showProgressView = true
+    func login(){
+        if credentials.email.isEmpty{
+            self.error = .emptyEmail
+            return
+        }
+        if credentials.password.isEmpty{
+            self.error = .emptyPassword
+            return
+        }
+        self.showProgressView = true
         AuthenticationService.shared.login(credentials: credentials){ [unowned self] (result: Result<Bool, Authentication.AuthenticationError>) in
-            showProgressView = false
             switch result{
             case .success:
-                completion(true)
                 ifAuth = true
-            case .failure(let auth):
+            case .failure(let err):
                 self.credentials.password = ""
                 withAnimation{
-                    error = auth
+                    error = err
                 }
-                completion(false)
             }
+            self.showProgressView = false
         }
+    }
+    
+    func autoLogin(){
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+            guard Auth.auth().currentUser != nil else{
+                self.showProgressView = false
+                return
+            }
+            self.ifAuth = true
+            self.showProgressView = false
+        })
     }
     
     func register(email: String, password: String, completion: @escaping (Bool) -> Void){
@@ -57,9 +76,11 @@ class LoginViewModel : ObservableObject {
     
     func logOut(){
         showProgressView = true
-        AuthenticationService.shared.logOut()
-        showProgressView = false
-        self.ifAuth = false
-        self.credentials.password = ""
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            AuthenticationService.shared.logOut()
+            self.ifAuth = false
+            self.credentials.password = ""
+            self.showProgressView = false
+        }
     }
 }

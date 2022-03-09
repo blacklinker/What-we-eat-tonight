@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
-    
+    @AppStorage("Username") var email: String = AuthenticationService.shared.useremail
     @State var myView: MyViews = .main
 
     var body: some View {
-        MainScreen(myView: $myView)
+        MainScreen(email, $myView)
     }
 }
 

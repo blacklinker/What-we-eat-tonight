@@ -13,7 +13,7 @@ struct AddNewTopNav: View {
             Text("")
             Spacer()
             Button(action: { print("save") }){
-                Text("保存")
+                Text("Save")
             }.font(.system(size: 12))
                 .frame(height: 20)
                 .padding(.leading, 10)

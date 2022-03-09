@@ -9,8 +9,6 @@ import Foundation
 
 enum MyViews{
     case main
-    case add
-    case search
     case settings
 }
 

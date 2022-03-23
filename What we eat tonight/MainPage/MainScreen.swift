@@ -20,7 +20,9 @@ struct MainScreen: View {
     
     var body: some View {
         if !loginVM.ifAuth{
-            LoginScreen().environmentObject(loginVM)
+            LoginScreen().environmentObject(loginVM).task {
+                await mainRecipeVM.getAllData()
+            }
         } else{
             NavigationView{
                 VStack{

@@ -68,7 +68,7 @@ class MainRecipeViewModel: ObservableObject{
             }
         }
     }
-
+    
     func addToEatToday(recipeId: String) async{
         FirestoreService.shared.addToEatToday(docId: recipeId) { result in
             switch result{
